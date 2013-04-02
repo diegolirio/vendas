@@ -1,0 +1,26 @@
+<html>
+<head>
+	<title>Clientes</title>
+</head>
+<body>
+	Clientes
+	<br/>
+	<table border="1">
+		<tr>
+			<td>CNPJ/CPF</td>
+			<td>Nome</td>
+			<td>Telefone</td>
+			<td>-</td>
+		</tr>
+		{% for c in clientes %}
+		<tr>
+			<td>{{ c.cnpj_cpf }}</td>
+			<td>{{ c.nome }}</td>
+			<td>({{ c.telefone.ddd }}) {{ c.telefone.numero }}</td>
+			<td><a href="cad_cliente">Editar</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+</body>
+</html>

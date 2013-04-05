@@ -17,7 +17,7 @@
 			<td>{{ c.cnpj_cpf }}</td>
 			<td>{{ c.nome }}</td>
 			<td>({{ c.telefone.ddd }}) {{ c.telefone.numero }}</td>
-			<td><a href="cad_cliente">Editar</a></td>
+			<td><a href="cliente_edit/{{ c.id }}">Editar</a></td>
 		</tr>
 		{% endfor %}
 	</table>

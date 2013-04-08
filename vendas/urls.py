@@ -6,6 +6,10 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:'),
+    url(r'^usuarios$', 'usuario.views.getAllUsuarios', name='usuarios'),  
+    url(r'^usuario_new$', 'usuario.views.new', name='new_user'),  
+
+
     url(r'^clientes$', 'cliente.views.clientes', name='clientes'),  
      
     #(r'^polls/(?P<poll_id>\d+)/$', 'mysite.polls.views.detail'),  

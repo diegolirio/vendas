@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'cliente',
     'produto',
     'vendas_produtos',
+	'usuario',
 )
 
 # A sample logging configuration. The only tangible logging

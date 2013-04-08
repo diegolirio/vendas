@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Usuarios</title>
+</head>
+<body>
+	Usuarios
+	<br/>
+	<table border="1">
+		<tr>
+			<td>Nome</td>
+			<td>Login</td>
+			<td>Senha</td>
+			<td>Data de Cadastro</td>
+			<td>-</td>
+		</tr>
+		{% for u in usuarios %}
+		<tr>
+			<td>{{ u.nome }}</td>
+			<td>{{ u.login }}</td>
+			<td>{{ u.senha }}</td>
+			<td>{{ u.dataCadastro }}</td>
+			<td><a href="usuario_edit/{{ u.id }}">Editar</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+	<td><a href="usuario_new">Novo</a></td>
+	
+</body>
+</html>

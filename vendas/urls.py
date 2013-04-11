@@ -8,7 +8,10 @@ urlpatterns = patterns('',
     # Examples:'),
     url(r'^usuarios$', 'usuario.views.getAllUsuarios', name='usuarios'),  
     url(r'^usuario_new$', 'usuario.views.new', name='new_user'),  
-
+	url(r'^usuario_edit/(?P<pk>\d+)/$', 'usuario.views.edit'),
+	url(r'^usuario_edit/(?P<pk>[A-Za-z]+)/$', 'usuario.views.edit'),
+	
+	#url(r'^pais_edit/(?P<pk>[A-Za-z]+)/$', 'endereco.views.pais_edit'),
 
     url(r'^clientes$', 'cliente.views.clientes', name='clientes'),  
      

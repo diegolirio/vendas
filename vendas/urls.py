@@ -19,9 +19,15 @@ urlpatterns = patterns('',
 	url(r'^cliente_new/$', 'cliente.views.cliente_new'),
 	url(r'^cliente_edit/(?P<pk>\d+)/$', 'cliente.views.cliente_edit'),
 	url(r'^cliente_delete/(?P<pk>\d+)/$', 'cliente.views.cliente_delete'),
+	
+	# ------- Marcas ------
+	url(r'^marcas/$', 'produto.views.marcas'),
+	url(r'^marca_new/$', 'produto.views.marca_new'),
+	url(r'^marca_edit/(?P<pk>\d+)/$', 'produto.views.marca_edit'),
+	url(r'^marca_delete/(?P<pk>\d+)/$', 'produto.views.marca_delete'),
     
-    url(r'^produtos$', 'produto.views.produtos', name='produtos'),
-    url(r'^vendas_produtos$', 'vendas_produtos.views.vendas', name='vendas'),
+    url(r'^produtos/$', 'produto.views.produtos', name='produtos'),
+    url(r'^vendas_produtos/$', 'vendas_produtos.views.vendas', name='vendas'),
     url(r'^$', 'vendas_produtos.views.home', name='home'),
     # url(r'^vendas/', include('vendas.foo.urls')),
 

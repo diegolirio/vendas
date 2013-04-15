@@ -1,0 +1,22 @@
+{% extends '_base.html' %}
+
+{% block body %}
+	
+	<br/><br/><br/>
+	
+	<div class="container">
+		<h1>Cadastro de Marca</h1>
+		<br/>
+		<form action="" method="POST"> {% csrf_token %}
+			
+			{{ form.as_p }}
+			
+			<br/>
+			
+			<input type="submit" value="Salvar" name="save" class="btn btn-success"/>
+			<input type="submit" value="Salvar e Registrar um Novo" name="save" class="btn"/>
+			<a href="/marcas/" class="btn">Cancelar</a>
+		</form>
+	</div>
+	
+{% endblock %}

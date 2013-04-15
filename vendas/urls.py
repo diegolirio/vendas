@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -6,21 +7,19 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:'),
-    url(r'^usuarios$', 'usuario.views.getAllUsuarios', name='usuarios'),  
-    url(r'^usuario_new$', 'usuario.views.new', name='new_user'),  
+    
+    # Usuarios
+    url(r'^usuarios/$', 'usuario.views.getAllUsuarios', name='usuarios'),  
+    url(r'^usuario_new/$', 'usuario.views.new', name='new_user'),  
 	url(r'^usuario_edit/(?P<pk>\d+)/$', 'usuario.views.edit'),
-	url(r'^usuario_edit/(?P<pk>[A-Za-z]+)/$', 'usuario.views.edit'),
+	url(r'^usuario_delete/(?P<pk>\d+)/$', 'usuario.views.usuario_delete'),
 	
-	#url(r'^pais_edit/(?P<pk>[A-Za-z]+)/$', 'endereco.views.pais_edit'),
-
-    url(r'^clientes$', 'cliente.views.clientes', name='clientes'),  
-     
-    #(r'^polls/(?P<poll_id>\d+)/$', 'mysite.polls.views.detail'),  
-    #url(r'^cliente_edit/(?P<pk>[A-Za-z]+)/$', 'cliente.views.cliente_edit'),
+	# ------ Clientes ------
+    url(r'^clientes/$', 'cliente.views.clientes', name='clientes'),  
+	url(r'^cliente_new/$', 'cliente.views.cliente_new'),
+	url(r'^cliente_edit/(?P<pk>\d+)/$', 'cliente.views.cliente_edit'),
+	url(r'^cliente_delete/(?P<pk>\d+)/$', 'cliente.views.cliente_delete'),
     
-    url(r'^cliente_edit/(?P<pk>\d+)/$', 'cliente.views.cliente_edit'),
-    
-    url(r'^cad_cliente$', 'cliente.views.set_cliente', name='set_cliente'),
     url(r'^produtos$', 'produto.views.produtos', name='produtos'),
     url(r'^vendas_produtos$', 'vendas_produtos.views.vendas', name='vendas'),
     url(r'^$', 'vendas_produtos.views.home', name='home'),
@@ -32,3 +31,9 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )
+
+
+if settings.DEBUG:
+	urlpatterns += patterns('', 
+	                        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+    )

@@ -1,34 +1,33 @@
-<html>
-<head>
-	<title>Cadastro de Cliente</title>
-</head>
-<body>
-	Cadastro de Cliente
-	
-	<hr/>
-	
-	<form method="POST">
-		{{ form.as_p }}
-		<a href="cliente_edit" class="btn" type="button">Salvar</a>
-	</form>
-	
-	
-	<!--
-	<form method="POST">	
-		CNPJ/CPF: <br/>
-		<input type="text" value="{{ c.cnpj_cpf }}" size="20"/>
-		<br/><br/>
-		 
-		Nome: <br/>
-		<input type="text" value="{{ c.nome }}" size="100"/>
-		<br/><br/>
+{% extends '_base.html' %}
+
+{% block body %}
+	<div class="container">
+		<br/><br/><br/>
+		<h1 class="text-center">Cadastro de Cliente</h1>		
+		<hr/>		
+		<form method="POST"> {% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="salvar" class="btn btn-success"/>
+			<a href="/clientes/" class="btn">Cancelar</a>		
+		</form>
 		
-		Telefone: <br/>
-		<input type="text" value="{{ c.telefone.numero }}" size="15"/>	
-		<br/><br/>
 		
-		<a href="cliente_edit" class="btn" type="button">Salvar</a>
-	</form>	
-	-->
-</body>
-</html>
+		<!--
+		<form method="POST">	
+			CNPJ/CPF: <br/>
+			<input type="text" value="{{ c.cnpj_cpf }}" size="20"/>
+			<br/><br/>
+			 
+			Nome: <br/>
+			<input type="text" value="{{ c.nome }}" size="100"/>
+			<br/><br/>
+			
+			Telefone: <br/>
+			<input type="text" value="{{ c.telefone.numero }}" size="15"/>	
+			<br/><br/>
+			
+			<a href="cliente_edit" class="btn" type="button">Salvar</a>
+		</form>	
+		-->
+	</div>
+{% endblock %}	

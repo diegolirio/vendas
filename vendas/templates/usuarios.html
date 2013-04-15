@@ -1,30 +1,40 @@
-<html>
-<head>
-	<title>Usuarios</title>
-</head>
-<body>
-	Usuarios
-	<br/>
-	<table border="1">
-		<tr>
-			<td>Nome</td>
-			<td>Login</td>
-			<td>Senha</td>
-			<td>Data de Cadastro</td>
-			<td>-</td>
-		</tr>
-		{% for u in usuarios %}
-		<tr>
-			<td>{{ u.nome }}</td>
-			<td>{{ u.login }}</td>
-			<td>{{ u.senha }}</td>
-			<td>{{ u.dataCadastro }}</td>
-			<td><a href="usuario_edit/{{ u.id }}">Editar</a></td>
-		</tr>
-		{% endfor %}
-	</table>
-	
-	<td><a href="usuario_new">Novo</a></td>
-	
-</body>
-</html>
+{% extends '_base.html' %}
+
+{% block body %}
+		<br/><br/>
+		<div class="container">
+		<h1 class="text-center">Usuários</h1>
+		<br/>
+		<table class="table table-striped table-hover">
+			<tr>
+				<td>Nome</td>
+				<td>Login</td>
+				<td>Senha</td>
+				<td>Data de Cadastro</td>
+				<td>Alterar</td>
+				<td>Excluir</td>
+			</tr>
+			{% for u in usuarios %}
+			<tr>
+				<td>{{ u.nome }}</td>
+				<td>{{ u.login }}</td>
+				<td>{{ u.senha }}</td>
+				<td>{{ u.dataCadastro }}</td>
+				<td class="text-center"><a href="/usuario_edit/{{ u.id }}/"><i class="icon-edit"></i></a></td>
+				
+				<td class="text-center">
+					<a href="javascript:onclick(window.open('/usuario_delete/{{ u.id }}/', '', 'height=500, width=650, top=150, left=250, scrollbars=no, resizable=no'));">
+						<i class="icon-trash"></i>
+					</a>
+				</td>
+			</tr>
+			{% empty %}
+				<h2>Não há Usuários cadastrados</h2>		
+			{% endfor %}
+		</table>
+		
+		<div class="text-center">
+			<td><a href="/usuario_new/" class="btn btn-primary">Novo</a></td>
+		</div>
+	</div>
+{% endblock %}

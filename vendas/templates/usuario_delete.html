@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+
+{% block body %}
+
+	<div class="container">
+		
+		<br/><br/><br/>
+		
+		<h1 class="text-warning">Deseja realmente Excluir ? </h1>
+		<br/>
+		<form method="POST" action=""> {% csrf_token %}
+			<h3>{{ usuario.nome }} </h3>
+			<p>login: {{ usuario.login }} </p>
+			<p>senha: </p>
+			<p>Cadastrado: {{ usuario.dataCadastro }}</p>
+						
+			
+			<br/><br/>	
+			
+			<input type="submit" value="Excluir" class="btn btn-danger"/>
+			<a href="/usuarios/" class="btn">Cancelar</a>			
+			
+		</form>
+		
+	</div>	
+	
+
+{% endblock %}

@@ -1,18 +1,18 @@
-<html>
-<head>
-	<title>Cadastro de Usuario</title>
-</head>
-<body>
-	Cadastro de Usuario
-	
-	<hr/>
-	
-	<form method="POST" action="usuario_edit">
-		{{ form.as_p }}
-		<input type="submit" value="salvar"/>
-		<!--<a href="usuario_edit" type="button">Salvar</a>-->
-		<a href="usuarios">Cancelar</a>
-	</form>
-	
-</body>
-</html>
+{% extends '_base.html' %}
+
+{% block body %}
+
+	<br/><br/><br/>
+	<div class="container">
+		<h1>Cadastro de Usuário (Alteração)</h1>
+		<br/>
+		
+		<form method="POST"> {% csrf_token %}
+			{{ form.as_p }}	
+			<button type="submit" class="btn btn-success"> Salvar alteração</button>
+			<a href="/usuarios/" class="btn">Cancelar</a> 
+		</form>
+	</div>
+
+
+{% endblock %}	

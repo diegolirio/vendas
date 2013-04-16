@@ -26,7 +26,16 @@ urlpatterns = patterns('',
 	url(r'^marca_edit/(?P<pk>\d+)/$', 'produto.views.marca_edit'),
 	url(r'^marca_delete/(?P<pk>\d+)/$', 'produto.views.marca_delete'),
     
+    # ------- Produtos ------
     url(r'^produtos/$', 'produto.views.produtos', name='produtos'),
+    url(r'^produto_new/$', 'produto.views.produto_new'),
+    url(r'^produto_edit/(?P<pk>\d+)/$', 'produto.views.produto_edit'),
+    url(r'^produto_delete/(?P<pk>\d+)/$', 'produto.views.produto_delete'),
+    
+    # ------ Nfs ------
+    url(r'^nf_new/$', 'vendas_produtos.views.nf_new'),
+    url(r'^nf_det/(?P<pk>\d+)/$', 'vendas_produtos.views.nf_det'),
+    url(r'^nf_delete/(?P<pk>\d+)/$', 'vendas_produtos.views.nf_delete'),
     url(r'^vendas_produtos/$', 'vendas_produtos.views.vendas', name='vendas'),
     url(r'^$', 'vendas_produtos.views.home', name='home'),
     # url(r'^vendas/', include('vendas.foo.urls')),

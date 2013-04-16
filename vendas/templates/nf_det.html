@@ -1,0 +1,68 @@
+{% extends '_base.html' %}
+
+{% block body %}
+
+	<script type="text/javascript">
+	
+		function delete__(url) {
+				w = window.open(url,
+								'',
+								'height=550, width=750, top=100, left=250, scrollbras=no, resizable=no');
+		}
+		
+	</script>
+	
+	<div class="container">
+		<br/><br/>
+		<br/><br/>
+		
+		<div class="row">
+		<h3>
+			<div class="span3">
+				<span class="text-error">NF: </span>{{ nf.numero }}
+			</div>
+			<div class="span3">
+				<span class="text-error">CNPJ: </span>{{ nf.cliente.cnpj_cpf }}
+			</div>
+		</h3>
+		</div>
+		<div class="row">
+			<div class="span3">
+				<p><span class="text-error">Cliente: </span>{{ nf.cliente.nome }}</p>
+			</div>
+			<div class="span3">
+				<p><span class="text-error">Data: </span>{{ nf.data }}</p>
+			</div>
+			<div class="span3">
+				<a href="/vendas_produtos/" class="btn">Voltar</a>
+				<a href="/nf_delete/{{ nf.id }}/" onclick="delete__(this.href); return false;" class="btn btn-danger">Excluir Nota</a>
+			</div>
+		</div>
+		
+		<br/><br/>
+		<h5 class="text-info">Produtos</h5>
+		<table class="table">
+			<tr>
+				<td class="text-error">ID</td>
+				<td class="text-error">Código</td>
+				<td class="text-error">Nome</td>
+				<td class="text-error">Marca</td>
+				<td class="text-error">Valor</td>
+				<td></td>
+			</tr>
+			{% for p in nf.produtos.all %}
+			<tr>
+				<td>{{ p.id }}</td>
+				<td>{{ p.codigo }}</td>
+				<td>{{ p.nome }}</td>
+				<td>{{ p.marca.nome }}</td>
+				<td>{{ p.valor }}</td>
+				<td><a href="#" title="Exluir Produto da Nota">Excluir</a></td>
+			</tr>
+			{% empty %}
+				<h3>Não há produtos relacionados na Nota Fiscal</h3>
+			{% endfor %}
+		</table>
+		
+	</div>
+{% endblock %}

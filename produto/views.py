@@ -2,14 +2,43 @@ from django.shortcuts import render_to_response
 from produto.models import Produto
 from produto.models import Marca
 from produto.forms import MarcaForm
+from produto.forms import ProdutoForm
 from django.template import RequestContext
 
-def produtos(request):
-	
-	ps = Produto.objects.all()
-	
+def produtos(request):	
+	ps = Produto.objects.all()	
 	return render_to_response('produtos.html', {'produtos': ps})
-	
+
+def produto_new(request):
+	if request.method == 'POST':
+		form = ProdutoForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return produtos(request)
+	else:
+		p = Produto()
+		form = ProdutoForm(instance=p)
+	return render_to_response('produto_new.html', {'form': form}, context_instance=RequestContext(request))
+		
+def produto_edit(request, pk):
+	p = Produto.objects.get(pk=pk)
+	if request.method == 'POST':
+		form = ProdutoForm(request.POST, request.FILES, instance=p)
+		if form.is_valid():
+			form.save()
+			return produtos(request)
+	else:
+		form = ProdutoForm(instance=p)
+	return render_to_response('produto_edit.html', {'form': form}, context_instance=RequestContext(request)) 
+		
+def produto_delete(request, pk):
+	p = Produto.objects.get(pk=pk)
+	delected = 'N'
+	if request.method == 'POST':
+		p.delete()
+		delected = 'S'
+	return render_to_response('produto_delete.html', {'produto': p, 'delected': delected}, context_instance=RequestContext(request))
+		
 	
 def marcas(request):
 	marcas = Marca.objects.all()

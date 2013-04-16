@@ -1,39 +1,36 @@
-<html>
-<head>
-	<title>Vendas</title>
-</head>
-<body>
-	Vendas
-	<br/>
-	{{ nf }}
-	<br/><br/>
+{% extends '_base.html' %}
+
+{% block body %}
 	
-	{% for nf in nfs %}
 	
-		NF: {{ nf.numero }} <br/>
-		Cliente: {{ nf.cliente.nome }} <br/>
-		Data: {{ nf.data }} <br/>
+	<br/><br/><br/>
+
+	<div class="container">
+		
+		<h1> Notas Fiscais</h1>
+		
+		<div class="text-right">
+			<a href="/nf_new/" class="btn btn-success">Realizar venda</a>
+		</div>
 		
 		<br/>
 		
-		<b style="color: red;">Produtos</b>
-		<table border="1">
+		<table class="table table-striped table-hover">
 			<tr>
-				<td>Codigo</td>
-				<td>Nome</td>
-				<td>Valor</td>
-				<td>Marca</td>
+				<td class="text-info">NF</td>
+				<td class="text-info">Cliente</td>
+				<td class="text-info">Data</td>
+				<td></td>
 			</tr>
-			{%  for p in nf.produtos.all %}
+			{% for nf in nfs %}
 			<tr>
-				<td>{{ p.codigo }}</td>
-				<td>{{ p.nome }}</td>
-				<td>{{ p.valor }}</td>
-				<td>{{ p.marca.nome }}</td>
+				<td>{{ nf.numero }}</td>
+				<td>{{ nf.cliente.nome }}</td>
+				<td>{{ nf.data }}</td>
+				<td><a href="/nf_det/{{ nf.id }}/"><i class="icon-share-alt"></i> Ver detalhes...</a></td>
 			</tr>		
 			{% endfor %}
 		</table>
-		<hr/>
-	{% endfor %}
-</body>
-</html>
+	</div>		
+
+{% endblock %}

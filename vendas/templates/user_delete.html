@@ -1,0 +1,43 @@
+{% extends '_base_delete.html' %}
+
+{% block body %}
+
+	<div class="container">
+		
+		<script type="text/javascript">		
+			
+			{% if delected == 'S' %}
+				alert('Excluído com sucesso');
+				close__('S');
+			{% endif %}
+			
+			function close__(delected) {	
+				if (delected == 'S') {			
+					//window.opener.location.reload(); 
+					window.opener.location.replace('/users/');
+				}				
+				window.close();				                
+			}
+		</script>
+		
+		<br/><br/><br/>
+		
+			<h1 class="text-warning">Deseja realmente Excluir ? </h1>
+			<br/>
+			<form method="POST" action=""> {% csrf_token %}
+				<h3>{{ user.first_name }} {{ user.last_name }} </h3>
+				<p>ID: {{ user.id }}</p>
+				<p>E-mail: {{ user.email }}</p>
+				<p>Status de superusuário: &nbsp;<input checked="{{ user.is_superuser }}" id="id_is_superuser" name="is_superuser" type="checkbox" /></p>
+				
+				<br/><br/>	
+				
+				<input type="submit" value="Excluir" class="btn btn-danger"/>
+				<a href="#" onclick="close__('N')" class="btn">Cancelar</a>			
+				
+			</form>
+		
+	</div>	
+	
+
+{% endblock %}

@@ -18,6 +18,7 @@ urlpatterns = patterns('',
 	url(r'^users/$', 'usuario.views.users'),
 	url(r'^user_new/$', 'usuario.views.user_new'),
 	url(r'^user_edit/(?P<pk>\d+)/$', 'usuario.views.user_edit'),
+	url(r'^user_delete/(?P<pk>\d+)/$', 'usuario.views.user_delete'),
 	
 	# ------ Clientes ------
     url(r'^clientes/$', 'cliente.views.clientes', name='clientes'),  

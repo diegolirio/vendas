@@ -38,8 +38,7 @@
 				<td>Password</td>
 				<td>Email</td>
 				<td>Last login</td>
-				<td>Alterar</td>
-				<td>Excluir</td>
+				<td>Opções</td>
 			</tr>			
 			{% for u in users %}
 			<tr>
@@ -51,11 +50,17 @@
 				<td>{{ u.email }}</td>
 				<td>{{ u.last_login }}</td>
 				
-				<td class="text-center"><a href="/user_edit/{{ u.id }}/"><i class="icon-edit"></i></a></td>
-				
-				<td class="text-center">
-					<a href="/usuario_delete/{{u.id}}/" onclick="delete(this.href); return false;"><i class="icon-trash"></i></a>
-					<!--<a href="javascript:onclick(/usuario_delete/{{ u.id }}/);"><i class="icon-trash"></i></a>-->
+				<td>
+					<div class="btn-group">
+					  <a class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#">
+						Ação
+						<span class="caret"></span>
+					  </a>
+					  <ul class="dropdown-menu">
+							<li><a href="/user_edit/{{ u.id }}/"><i class="icon-edit"></i>  Alterar</a></li>
+							<li><a href="/user_delete/{{ u.id }}/" onclick="delete__(this.href); return false;"><i class="icon-trash"></i>  Excluir</a></li>
+					  </ul>
+					</div>
 				</td>
 			</tr>
 			{% empty %}

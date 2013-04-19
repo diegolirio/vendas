@@ -91,3 +91,12 @@ def user_edit(request, pk):
 	else:
 		form = UserForm(instance=user)
 	return render_to_response('user_edit.html', {'form': form}, context_instance=RequestContext(request))
+
+def user_delete(request, pk):
+	u = User.objects.get(pk=pk)
+	delected = 'N'
+	if request.method == 'POST': 
+		u.delete()
+		delected = 'S'
+	return render_to_response('user_delete.html', {'user': u, 'delected': delected}, context_instance=RequestContext(request))
+		

@@ -1,0 +1,17 @@
+{% extends '_base.html' %}
+
+{% block body %}
+
+	<br/><br/><br/>
+	<div class="container">
+		<h1>Cadastro</h1>
+		<br/>
+		 
+		<form method="POST" action=""> {% csrf_token %}
+			{{ form.as_p }}	 
+			<button type="submit" class="btn btn-success"> Salvar</button>
+			<a href="/users/" class="btn">Cancelar</a> 
+		</form>
+	</div>
+
+{% endblock %}

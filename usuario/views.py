@@ -6,12 +6,18 @@ from usuario.forms import UsuarioForm
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
+from usuario.forms import UserForm
 
 # Create your views here.
 
 def getAllUsuarios(request):
 	usuarios = Usuario.objects.all()
 	return render_to_response('usuarios.html', {'usuarios': usuarios}, context_instance=RequestContext(request))
+		
+#def getAllUsuarios(request):
+#	users = Users.objects.all()
+#	return render_to_response('usuarios.html', {'users': users}, context_instance=RequestContext(request))	
 
 def new(request):
 	if request.method == 'POST':
@@ -57,3 +63,31 @@ def usuario_delete(request, pk):
 		#return render_to_response('usuario_delete.html', )
 	#else:
 	return render_to_response('usuario_delete.html', {'usuario': u, 'delected': delected}, context_instance=RequestContext(request))
+
+
+
+def users(request):
+	users = User.objects.all()
+	return render_to_response('users.html', {'users': users}, context_instance=RequestContext(request))	
+	
+def user_new(request):
+	#user = User()
+	if request.method == 'POST':
+		form = UserForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return users(request)
+	else:
+		form = UserForm()
+	return render_to_response('user_new.html', {'form': form}, context_instance=RequestContext(request))	
+
+def user_edit(request, pk):
+	user = User.objects.get(pk=pk)
+	if request.method == 'POST':
+		form = UserForm(request.POST, request.FILES, instance=user)
+		if form.is_valid():
+			form.save()
+			return users(request)
+	else:
+		form = UserForm(instance=user)
+	return render_to_response('user_edit.html', {'form': form}, context_instance=RequestContext(request))

@@ -11,3 +11,5 @@ class Usuario(Pessoa):
 	
 	def __unicode__(self):
 		return self.login
+		
+	

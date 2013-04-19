@@ -1,0 +1,20 @@
+{% extends '_base.html' %}
+
+{% block body %}
+	
+	<br/><br/><br/>
+	
+	<div class="container">
+		<h1>Cadastro de Usuario (Alteração)</h1>
+		<br/>
+		
+		<form method="POST" action=""> {% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Salvar alteração" class="btn btn-success"/>
+			<a href="/users/" class="btn">Cancelar</a> 
+		</form>
+		
+	</div>
+	
+	
+{% endblock %}

@@ -1,8 +1,10 @@
 from django.shortcuts import render_to_response
 from produto.models import Produto
 from produto.models import Marca
+from produto.models import Fornecedor
 from produto.forms import MarcaForm
 from produto.forms import ProdutoForm
+from produto.forms import FornecedorForm
 from django.template import RequestContext
 
 def produtos(request):	
@@ -76,3 +78,17 @@ def marca_delete(request, pk):
 		delected = 'S'
 	return render_to_response('marca_delete.html', {'marca': m, 'delected': delected}, context_instance=RequestContext(request))
 	
+def fornecedores(request):
+	fornecedores = Fornecedor.objects.all()
+	return render_to_response('fornecedores.html', {'fornecedores': fornecedores})
+
+def fornecedor_new(request):
+	if request.method == 'POST':
+		form = FornecedorForm(request.POST, request.FILES)
+		if form.is_valid():
+			fornecedor = form.model
+			fornecedor.save()
+			return fornecedores(request)
+	else:
+		form = FornecedorForm()
+	return render_to_response('fornecedor_new.html', {'form': form}, context_instance=RequestContext(request))

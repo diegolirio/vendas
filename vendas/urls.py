@@ -45,6 +45,10 @@ urlpatterns = patterns('',
     url(r'^vendas_produtos/$', 'vendas_produtos.views.vendas', name='vendas'),
     url(r'^$', 'vendas_produtos.views.home', name='home'),
     # url(r'^vendas/', include('vendas.foo.urls')),
+    
+    # ---------- Fornecedor ------------
+    url(r'^fornecedores/$', 'produto.views.fornecedores'),
+    url(r'^fornecedor_new/$', 'produto.views.fornecedor_new'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+
+{% block body %}
+
+	<div class="container">	
+		<h1>Diego</h1>
+		
+		<a href="/fornecedor_new/" class="btn btn-primary pull-right">Novo</a>
+		<br/><br/>
+		
+		<table class="table table-hover">
+			<tr>
+				<td>ID</td>
+				<td>CNPJ/CPF</td>
+				<td>Nome</td>
+				<td>Telefone</td>
+			</tr>         
+			{% for f in fornecedores %}
+				<tr>
+					<td>{{ f.id }}</td>
+					<td>{{ f.cnpj_cpf }}</td>
+					<td>{{ f.nome }}</td>
+					<td>{{ f.telefone.numero }}</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}

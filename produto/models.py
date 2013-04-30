@@ -1,16 +1,15 @@
 from django.db import models
+from cliente.models import Telefone
 
 # Create your models here.
 
-class Marca(models.Model):
-	
+class Marca(models.Model):	
 	nome = models.CharField(max_length=50)
 	
 	def __unicode__(self):
 		return self.nome
 
-class Produto(models.Model):
-	
+class Produto(models.Model):	
 	codigo = models.IntegerField()
 	nome  = models.CharField(max_length=50)
 	valor = models.FloatField()
@@ -20,3 +19,11 @@ class Produto(models.Model):
 	def __unicode__(self):
 		return str(self.codigo) + ": " + self.nome + " - " + self.marca.nome
 	
+
+class Fornecedor(models.Model):
+	cnpj_cpf = models.CharField(max_length=20)
+	nome = models.CharField(max_length=50)
+	telefone = models.ForeignKey(Telefone) 
+	
+	def __unicode__(self):
+		return self.nome

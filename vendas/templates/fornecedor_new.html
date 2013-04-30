@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+
+{% block body %}
+
+	<div class="container">
+		
+		<h1>Cadastro de Fornecedor</h1>
+		
+		<br/>
+
+		<form method="POST" action=""> {% csrf_token %}
+			CNPJ/CPF<br/>
+			<input type="text" value="{{form.model.cnpj_cpf}}"/><br/>
+			Nome<br/>
+			<input type="text" value="{{form.model.nome}}"/><br/>
+			
+			<input type="submit" value="Salvar" class="btn"/>
+			
+		</form>
+		
+	</div>
+
+{% endblock %}

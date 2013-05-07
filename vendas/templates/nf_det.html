@@ -22,7 +22,7 @@
 				<span class="text-error">NF: </span>{{ nf.numero }}
 			</div>
 			<div class="span3">
-				<span class="text-error">CNPJ: </span>{{ nf.cliente.cnpj_cpf }}
+				<span class="text-error">CNPJ: </span>{{ nf.cliente.cnpj_cpf }} v.t {{ nf.valorTotal }}
 			</div>
 		</h3>
 		</div>
@@ -42,21 +42,39 @@
 		<br/><br/>
 		<h5 class="text-info">Produtos</h5>
 		<table class="table">
-			<tr>
-				<td class="text-error">ID</td>
-				<td class="text-error">Código</td>
-				<td class="text-error">Nome</td>
-				<td class="text-error">Marca</td>
-				<td class="text-error">Valor</td>
-				<td></td>
-			</tr>
-			{% for p in nf.produtos.all %}
-			<tr>
-				<td>{{ p.id }}</td>
-				<td>{{ p.codigo }}</td>
-				<td>{{ p.nome }}</td>
-				<td>{{ p.marca.nome }}</td>
-				<td>{{ p.valor }}</td>
+			<thead>
+				<tr class="text-info">
+					<td>ID</td>
+					<td>Código</td>
+					<td>Nome</td>
+					<td>Marca</td>
+					<td>Valor Unt.</td>
+					<td>Qtde</td>
+					<td>Valor</td>
+					<td>Ação</td>
+				</tr>
+			</thead>
+    		<tfoot>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>{{ nf.valorTotal }}</td>
+					<td></td>
+				</tr>
+			</tfoot>			
+			{% for item in items %} 
+			<tr> 
+				<td>{{ item.produto.id }}</td>
+				<td>{{ item.produto.codigo }}</td>
+				<td>{{ item.produto.nome }}</td>
+				<td>{{ item.produto.marca.nome }}</td>
+				<td>{{ item.produto.valor }}</td>
+				<td>{{ item.quantidade }}</td>
+				<td>{{ item.valorTotal }}</td>
 				<td><a href="#" title="Exluir Produto da Nota">Excluir</a></td>
 			</tr>
 			{% empty %}

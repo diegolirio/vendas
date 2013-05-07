@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from produto.models import Produto
 from produto.models import Marca
 from produto.models import Fornecedor
+from cliente.models import Telefone
 from produto.forms import MarcaForm
 from produto.forms import ProdutoForm
 from produto.forms import FornecedorForm
@@ -84,11 +85,11 @@ def fornecedores(request):
 
 def fornecedor_new(request):
 	if request.method == 'POST':
-		form = FornecedorForm(request.POST, request.FILES)
+		form = FornecedorForm(request.POST, request.FILES) 
 		if form.is_valid():
-			fornecedor = form.model
+			#fornecedor = form.model
 			fornecedor.save()
 			return fornecedores(request)
 	else:
 		form = FornecedorForm()
-	return render_to_response('fornecedor_new.html', {'form': form}, context_instance=RequestContext(request))
+	return render_to_response('fornecedor_new.html', {'form': form, 'telefones': Telefone.objects.all()}, context_instance=RequestContext(request))

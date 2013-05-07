@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from vendas_produtos.models import NotaFiscal
+from vendas_produtos.models import Items
 from cliente.models import Cliente
 from cliente.models import Telefone
 from produto.models import Produto
@@ -27,9 +28,10 @@ def nf_new(request):
 	return render_to_response('nf_new.html', {'form': form}, context_instance=RequestContext(request))
 
 def nf_det(request, pk):
-	nf = NotaFiscal.objects.get(pk=pk)	
-	return render_to_response('nf_det.html', {'nf': nf})
-
+	nf = NotaFiscal.objects.get(pk=pk)
+	items = Items.objects.all().filter(nota=nf)
+	return render_to_response('nf_det.html', {'nf': nf, 'items': items})
+ 
 def nf_delete(request, pk):
 	nf = NotaFiscal.objects.get(pk=pk)
 	delected = 'N'

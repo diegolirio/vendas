@@ -22,7 +22,7 @@
 				<span class="text-error">NF: </span>{{ nf.numero }}
 			</div>
 			<div class="span3">
-				<span class="text-error">CNPJ: </span>{{ nf.cliente.cnpj_cpf }} v.t {{ nf.valorTotal }}
+				<span class="text-error">CNPJ: </span>{{ nf.cliente.cnpj_cpf }}
 			</div>
 		</h3>
 		</div>
@@ -44,7 +44,7 @@
 		<table class="table">
 			<thead>
 				<tr class="text-info">
-					<td>ID</td>
+					<!--<td>ID</td>-->
 					<td>Código</td>
 					<td>Nome</td>
 					<td>Marca</td>
@@ -56,7 +56,7 @@
 			</thead>
     		<tfoot>
 				<tr>
-					<td></td>
+					<!--<td></td>-->
 					<td></td>
 					<td></td>
 					<td></td>
@@ -68,14 +68,14 @@
 			</tfoot>			
 			{% for item in items %} 
 			<tr> 
-				<td>{{ item.produto.id }}</td>
+				<!--<td>{{ item.produto.id }}</td>-->
 				<td>{{ item.produto.codigo }}</td>
 				<td>{{ item.produto.nome }}</td>
 				<td>{{ item.produto.marca.nome }}</td>
 				<td>{{ item.produto.valor }}</td>
 				<td>{{ item.quantidade }}</td>
 				<td>{{ item.valorTotal }}</td>
-				<td><a href="#" title="Exluir Produto da Nota">Excluir</a></td>
+				<td><a href="#" title="Exluir Produto da Nota" onclick="alert('Em desenvolvimento');">Excluir</a></td>
 			</tr>
 			{% empty %}
 				<h3>Não há produtos relacionados na Nota Fiscal</h3>

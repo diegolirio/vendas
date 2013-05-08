@@ -32,13 +32,13 @@
 		
 		<hr/> 
 		
-		<form method="POST" action="">
+		<form method="POST" action=""> {% csrf_token %}
 			<p>
 				<label for="id_cnpj_cpf">Cnpj cpf:</label> 
 				<input id="id_cnpj_cpf" type="text" name="cnpj_cpf" maxlength="20" />
 			</p>
 			<p>
-				<label for="id_nome">Nome:</label> 
+				<label for="id_nome">Nome:</label>  
 				<input id="id_nome" type="text" name="nome" maxlength="50" />
 			</p>
 			<p>
@@ -51,6 +51,11 @@
 				</select>
 				<a href="/tel_new/" onclick="new_tel_(this.href); return false;"><i class="icon-plus"></i></a>
 			</p>
+			
+			<a href="#" class="btn">Cancelar</a>
+			<input type="submit" value="Salvar" class="btn btn-primary"/>			
+			
+			
 		</form>
 		
 		

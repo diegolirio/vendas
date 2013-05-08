@@ -55,9 +55,13 @@ def cliente_delete(request, pk):
 
 
 def tel_new(request):
+	saved = 'N'
 	if request.method == 'POST':
 		form = TelefoneForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			saved = 'S'
 	else:
 		form = TelefoneForm()
-	return render_to_response('tel_new.html', {'form':form}, context_instance=RequestContext(request))
+	return render_to_response('tel_new.html', {'form':form, 'saved':saved}, context_instance=RequestContext(request))
 

@@ -48,10 +48,12 @@ urlpatterns = patterns('',
     
     # ---------- Fornecedor ------------
     url(r'^fornecedores/$', 'produto.views.fornecedores'),
-    url(r'^fornecedor_new/$', 'produto.views.fornecedor_new'),
+    url(r'^fornecedor_form/$', 'produto.views.fornecedor_form'),
+    url(r'^fornecedor_delete/(?P<pk>\d+)/$', 'produto.views.fornecedor_delete'),
     
     # ---------- Tel -------------------
-    url(r'^tel_new/$', 'cliente.views.tel_new'),
+    url(r'^tel_form/$', 'cliente.views.tel_form'),
+    url(r'^tel_delete/(?P<pk>\d+)/$', 'cliente.views.tel_delete'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

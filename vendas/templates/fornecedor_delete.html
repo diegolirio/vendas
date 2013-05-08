@@ -1,0 +1,23 @@
+{% extends '_base_simple.html' %}
+
+{% block body %}	
+	<br/><br/>
+	
+	<h1>Deseja realmente Excluir ?</h1>
+	
+	<br/>
+	
+	<h5>Fornecedor</h5>
+	
+	<form method="POST" action=""> {% csrf_token %}
+		<h3>{{ fornecedor.nome }}</h3>
+		<p>CNPJ: {{ fornecedor.cnpj_cpf }}</p>
+		
+		<br/><br/>	 
+		
+		<input type="submit" value="Excluir" class="btn btn-danger"/>
+		<a href="#" onclick="close__('N')" class="btn">Cancelar</a>			
+		
+	</form>	
+	
+{% endblock %}

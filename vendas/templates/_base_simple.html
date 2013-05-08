@@ -15,6 +15,22 @@
 		<script src="/media/bootstrap/bootswatch.js"></script>
 		<script src="/media/bootstrap/jquery.smooth-scroll.min.js"></script>
 		
+		<script type="text/javascript">		
+			
+			{% if delected == 'S' %}
+				alert('Excluído com sucesso');
+				close__('S');
+			{% endif %}
+			
+			function close__(delected) {	
+				if (delected == 'S') {			
+					window.opener.location.reload();
+					//window.opener.location.replace(window.opener.location); 
+				}				
+				window.close();				                
+			}
+		</script>		
+		
 	{% endblock %}
 </head>
 <body>

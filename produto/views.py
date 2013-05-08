@@ -7,6 +7,7 @@ from produto.forms import MarcaForm
 from produto.forms import ProdutoForm
 from produto.forms import FornecedorForm
 from django.template import RequestContext
+from django.http import HttpResponseRedirect
 
 def produtos(request):	
 	ps = Produto.objects.all()	
@@ -83,13 +84,26 @@ def fornecedores(request):
 	fornecedores = Fornecedor.objects.all()
 	return render_to_response('fornecedores.html', {'fornecedores': fornecedores})
 
-def fornecedor_new(request):
+def fornecedor_form(request):
 	if request.method == 'POST':
 		form = FornecedorForm(request.POST, request.FILES) 
 		if form.is_valid():
 			#fornecedor = form.model
-			fornecedor.save()
+			form.save()
+			#return HttpResponseRedirect(reverse('produto.views.fornecedores'))
 			return fornecedores(request)
 	else:
 		form = FornecedorForm()
-	return render_to_response('fornecedor_new.html', {'form': form, 'telefones': Telefone.objects.all()}, context_instance=RequestContext(request))
+	return render_to_response('fornecedor_form.html', 
+	                          {'form': form, 'telefones': Telefone.objects.all()}, 
+	                          context_instance=RequestContext(request))
+	                          
+def fornecedor_delete(request, pk):
+	f = Fornecedor.objects.get(pk=pk)
+	delected = 'N'
+	if request.method == 'POST':
+		f.delete()	                          
+		delected = 'S'
+	return render_to_response('fornecedor_delete.html', 
+							  {'fornecedor': f, 'delected': delected},
+							  context_instance=RequestContext(request))

@@ -1,6 +1,7 @@
 {% extends '_base_simple.html' %}
 
 {% block body %}
+	
 	<div class="container">
 		
 		<br/><br/><br/>
@@ -8,9 +9,9 @@
 			<h1 class="text-warning">Deseja realmente Excluir ? </h1>
 			<br/>
 			<form method="POST" action=""> {% csrf_token %}
-				<h3>{{ produto.nome }} </h3>
-				<p>Valor: {{ produto.valor }}</p>
-				<p>Marca: {{ produto.marca.nome }}</p>
+				<h3>{{ fornecedor.nome }} </h3>
+				<br/>
+				<p>CNPJ: {{f.cnpj_cpf }}</p>
 				
 				<br/><br/>	
 				
@@ -19,6 +20,6 @@
 				
 			</form>
 		
-	</div>	
+	</div>		
 	
 {% endblock %}

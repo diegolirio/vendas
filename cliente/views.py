@@ -54,7 +54,7 @@ def cliente_delete(request, pk):
 		return render_to_response('cliente_delete.html', {'cliente': c}, context_instance=RequestContext(request))
 
 
-def tel_new(request):
+def tel_form(request):
 	saved = 'N'
 	if request.method == 'POST':
 		form = TelefoneForm(request.POST, request.FILES)
@@ -63,5 +63,13 @@ def tel_new(request):
 			saved = 'S'
 	else:
 		form = TelefoneForm()
-	return render_to_response('tel_new.html', {'form':form, 'saved':saved}, context_instance=RequestContext(request))
+	return render_to_response('tel_form.html', {'form':form, 'saved':saved}, context_instance=RequestContext(request))
+	
+def tel_delete(request, pk):
+	t = Telefone.objects.get(pk=pk)
+	delected = 'N'
+	if request.method == 'POST':
+		t.delete()
+		delected = 'S'
+	return render_to_response('tel_delete.html', {'telefone': t, 'delected':	delected}, context_instance=RequestContext(request))
 

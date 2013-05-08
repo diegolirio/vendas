@@ -8,10 +8,13 @@ from django.http import HttpResponse
 from django.template import RequestContext
 
 class ClienteForm(forms.ModelForm):
-
     class Meta:
         model = Cliente
         #fields = ['id', 'cnpj_cpf', 'telefone.ddd/numero']
+        
+class TelefoneForm(forms.ModelForm):
+	class Meta:
+		model = Telefone
 
 def clientes(request):	
 	clientes = Cliente.objects.all()	
@@ -49,3 +52,12 @@ def cliente_delete(request, pk):
 		return clientes(request)
 	else:			
 		return render_to_response('cliente_delete.html', {'cliente': c}, context_instance=RequestContext(request))
+
+
+def tel_new(request):
+	if request.method == 'POST':
+		form = TelefoneForm(request.POST, request.FILES)
+	else:
+		form = TelefoneForm()
+	return render_to_response('tel_new.html', {'form':form}, context_instance=RequestContext(request))
+

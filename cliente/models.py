@@ -8,7 +8,7 @@ class Telefone(models.Model):
 	numero = models.IntegerField(max_length=10)
 	
 	def __unicode__(self):
-		return "(" + str(self.ddd) + ") " + str(self.numero)
+		return "(" + str(self.ddd) + ") " + str(self.numero) 
 
 class Pessoa(models.Model):
 	class Meta:

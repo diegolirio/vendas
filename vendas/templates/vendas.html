@@ -15,11 +15,12 @@
 		
 		<br/>
 		
-		<table class="table table-striped table-hover">
-			<tr>
-				<td class="text-info">NF</td>
-				<td class="text-info">Cliente</td>
-				<td class="text-info">Data</td>
+		<table class="table table-striped table-hover" >
+			<tr class="text-info">
+				<td>NF</td>
+				<td>Cliente</td>
+				<td>Data</td>
+				<td>Valor NF</td>
 				<td></td>
 			</tr>
 			{% for nf in nfs %}
@@ -27,6 +28,7 @@
 				<td>{{ nf.numero }}</td>
 				<td>{{ nf.cliente.nome }}</td>
 				<td>{{ nf.data }}</td>
+				<td class="pull-right">R$ {{ nf.valorTotal }}</td>
 				<td><a href="/nf_det/{{ nf.id }}/" title="mais detalhes..."><i class="icon-share-alt"></i> Ver items...</a></td>
 			</tr>		
 			{% endfor %}

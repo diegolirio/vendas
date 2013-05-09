@@ -9,6 +9,10 @@ from produto.forms import FornecedorForm
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 
+INSERT = 'insert'
+UPDATE = 'update'
+
+
 def produtos(request):	
 	ps = Produto.objects.all()	
 	return render_to_response('produtos.html', {'produtos': ps})
@@ -84,7 +88,8 @@ def fornecedores(request):
 	fornecedores = Fornecedor.objects.all()
 	return render_to_response('fornecedores.html', {'fornecedores': fornecedores})
 
-def fornecedor_form(request):
+def fornecedor_form(request, pk=None):
+	action = INSERT
 	if request.method == 'POST':
 		form = FornecedorForm(request.POST, request.FILES) 
 		if form.is_valid():
@@ -105,5 +110,5 @@ def fornecedor_delete(request, pk):
 		f.delete()	                          
 		delected = 'S'
 	return render_to_response('fornecedor_delete.html', 
-							  {'fornecedor': f, 'delected': delected},
+							  {'fornecedor': f, 'delected': delected, 'action': INSERT},
 							  context_instance=RequestContext(request))

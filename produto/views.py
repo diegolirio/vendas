@@ -89,18 +89,17 @@ def fornecedores(request):
 	return render_to_response('fornecedores.html', {'fornecedores': fornecedores})
 
 def fornecedor_form(request, pk=None):
-	action = INSERT
+	f = Fornecedor()
 	if request.method == 'POST':
 		form = FornecedorForm(request.POST, request.FILES) 
 		if form.is_valid():
-			#fornecedor = form.model
 			form.save()
-			#return HttpResponseRedirect(reverse('produto.views.fornecedores'))
 			return fornecedores(request)
 	else:
-		form = FornecedorForm()
+		if pk != '0':
+			f = Fornecedor.objects.get(pk=pk)
 	return render_to_response('fornecedor_form.html', 
-	                          {'form': form, 'telefones': Telefone.objects.all()}, 
+	                          {'f': f, 'telefones': Telefone.objects.all()}, 
 	                          context_instance=RequestContext(request))
 	                          
 def fornecedor_delete(request, pk):

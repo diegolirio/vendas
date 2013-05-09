@@ -48,7 +48,7 @@ urlpatterns = patterns('',
     
     # ---------- Fornecedor ------------
     url(r'^fornecedores/$', 'produto.views.fornecedores'),
-    url(r'^fornecedor_form/(?P<pk>[A-Za-z]+)$', 'produto.views.fornecedor_form'),
+    url(r'^fornecedor_form/(?P<pk>\d+)/$', 'produto.views.fornecedor_form'),
     url(r'^fornecedor_delete/(?P<pk>\d+)/$', 'produto.views.fornecedor_delete'),  
     
     # ---------- Tel -------------------

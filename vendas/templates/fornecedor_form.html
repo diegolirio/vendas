@@ -33,13 +33,16 @@
 		<hr/> 
 		
 		<form method="POST" action=""> {% csrf_token %}
+		
+			<input type="hidden" value="{{f.id}}" name="id"/>
+		
 			<p>
 				<label for="id_cnpj_cpf">Cnpj cpf:</label> 
-				<input id="id_cnpj_cpf" type="text" name="cnpj_cpf" maxlength="20" />
+				<input id="id_cnpj_cpf" type="text" name="cnpj_cpf" maxlength="20" value="{{f.cnpj_cpf}}"/>
 			</p>
 			<p>
 				<label for="id_nome">Nome:</label>  
-				<input id="id_nome" type="text" name="nome" maxlength="50" />
+				<input id="id_nome" type="text" name="nome" maxlength="50" value="{{f.nome}}"/>
 			</p>
 			<p>
 				<label for="id_telefone">Telefone:</label> 

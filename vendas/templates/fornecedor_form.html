@@ -47,9 +47,9 @@
 			<p>
 				<label for="id_telefone">Telefone:</label> 
 				<select name="telefone" id="id_telefone">				
-					<option value="" selected="selected">---------</option>
+					<option value="">---------</option>
 					{% for t in telefones %}
-						<option value="{{ t.id }}">({{t.ddd}}) {{t.numero}}</option>
+						<option value="{{ t.id }}" {% if t.id == f.telefone.id %} selected="selected" {% endif %} >({{t.ddd}}) {{t.numero}}</option>
 					{% endfor %}				
 				</select>
 				<a href="/tel_form/" onclick="new_tel_(this.href); return false;"><i class="icon-plus"></i></a>

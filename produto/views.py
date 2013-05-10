@@ -91,7 +91,11 @@ def fornecedores(request):
 def fornecedor_form(request, pk=None):
 	f = Fornecedor()
 	if request.method == 'POST':
-		form = FornecedorForm(request.POST, request.FILES) 
+		if pk == '0':
+			form = FornecedorForm(request.POST, request.FILES) 
+		else:
+			f = Fornecedor.objects.get(pk=pk)
+			form = FornecedorForm(request.POST, request.FILES, instance=f) 			
 		if form.is_valid():
 			form.save()
 			return fornecedores(request)

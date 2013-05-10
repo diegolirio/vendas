@@ -40,6 +40,11 @@ def nf_delete(request, pk):
 		delected = 'S'	
 	return render_to_response('nf_delete.html', {'nf': nf, 'delected': delected}, context_instance=RequestContext(request))
 	
-	
+def nf_form(request, pk):
+	if request.method == 'POST':
+		return vendas(request)
+	else:
+		nf = NotaFiscal()
+	return render_to_response('nf_form.html',{'nf':nf}, context_instance=RequestContext(request))
 	
 	

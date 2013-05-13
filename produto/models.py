@@ -24,6 +24,11 @@ class Fornecedor(models.Model):
 	cnpj_cpf = models.CharField(max_length=20)
 	nome = models.CharField(max_length=50)
 	telefone = models.ForeignKey(Telefone) 
+	ie = models.IntegerField()
+	
+	# Erro ao Salvar...
+	#def __init__(self):
+		#self.ie = ""	
 	
 	def __unicode__(self):
 		return self.nome

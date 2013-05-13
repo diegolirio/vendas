@@ -41,10 +41,15 @@ def nf_delete(request, pk):
 	return render_to_response('nf_delete.html', {'nf': nf, 'delected': delected}, context_instance=RequestContext(request))
 	
 def nf_form(request, pk):
+	nf = NotaFiscal()
+	nf.numero = ""
+	nf.data = ""
+	clientes = Cliente.objects.all()
 	if request.method == 'POST':
 		return vendas(request)
 	else:
-		nf = NotaFiscal()
-	return render_to_response('nf_form.html',{'nf':nf}, context_instance=RequestContext(request))
+		if pk != '0':
+			nf = NotaFiscal.objects.get(pk=pk)
+	return render_to_response('nf_form.html',{'nf':nf, 'clientes': clientes}, context_instance=RequestContext(request))
 	
 	

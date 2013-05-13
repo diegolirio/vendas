@@ -14,6 +14,7 @@
 				<td>CNPJ/CPF</td>
 				<td>Nome</td>
 				<td>Telefone</td>
+				<td>IE</td>
 				<td>Ação</td>
 			</tr>         
 			{% for f in fornecedores %}
@@ -22,6 +23,7 @@
 					<td>{{ f.cnpj_cpf }}</td>
 					<td>{{ f.nome }}</td>
 					<td>{{ f.telefone.numero }}</td>
+					<td>{{ f.ie }}</td>
 					<td>
 						<div class="btn-group">
 						  <a class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#">

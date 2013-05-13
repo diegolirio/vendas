@@ -90,6 +90,7 @@ def fornecedores(request):
 
 def fornecedor_form(request, pk=None):
 	f = Fornecedor()
+	f.ie = ""
 	if request.method == 'POST':
 		if pk == '0':
 			form = FornecedorForm(request.POST, request.FILES) 

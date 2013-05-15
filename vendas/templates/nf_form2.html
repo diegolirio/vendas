@@ -1,0 +1,73 @@
+{% extends '_base.html' %}
+
+{% block body %}
+
+	<div class="container">
+		<h2>Vendas</h2>
+		
+		<form action="" method="POST"> {% csrf_token %}
+		
+			{% if form.numero.errors %}
+				{% for error in form.numero.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Nº NF: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 
+			
+			{% if form.data.errors %}
+				{% for error in form.data.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Data: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 					
+			{% if form.cliente.errors %}
+				{% for error in form.cliente.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Cliente: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 
+			
+			{% if form.items.errors %}
+				{% for error in form.items.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Items: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 			
+						
+			<input type="hidden" id="id_id" name="id"/>
+			
+			<p>
+				<label for="id_numero">NF: </label>
+				<input type="text" name="numero" id="id_numero"/>
+			</p>
+			
+			<p>
+				<label for="id_data">Data: </label>
+				<input type="text" name="data" id="id_data"/>
+			</p>
+			
+			<p>
+				<label for="id_cliente">Cliente: </label>
+				<select id="id_cliente" name="cliente">
+					<option value=""> --------- </option>
+					{% for c in clientes %}
+						<option value="{{ c.id }}" {% if c.id == nf.cliente.id %} selected="selected" {% endif %}>{{ c.nome }}</option>
+					{% endfor %}
+				</select>
+			</p>
+			
+			<input type="submit" value="Salvar" class="btn btn-primary"/>
+			<a href="/vendas_produtos/" class="btn">Cancelar</a>
+			
+		</form>
+	</div>
+
+{% endblock %}

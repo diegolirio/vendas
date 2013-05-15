@@ -52,4 +52,22 @@ def nf_form(request, pk):
 			nf = NotaFiscal.objects.get(pk=pk)
 	return render_to_response('nf_form.html',{'nf':nf, 'clientes': clientes}, context_instance=RequestContext(request))
 	
+def nf_form2(request, pk):
+	nf = NotaFiscal()
+	clientes = Cliente.objects.all()
+	if request.method == 'POST':
+		if pk != '0':
+			nf = NotaFiscal.objects.get(pk=pk)
+			form = NotaFiscalForm(request.POST, request.FILES, instance=nf)
+		else:
+			form = NotaFiscalForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			print('NF gravada com sucesso')
+			return vendas(request)
+		else:
+			print('form invalido')
+	else:
+		form = NotaFiscalForm()
+	return render_to_response('nf_form2.html', {'nf': nf, 'clientes': clientes, 'form': form}, context_instance=RequestContext(request))
 	

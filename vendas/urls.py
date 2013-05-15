@@ -44,7 +44,7 @@ urlpatterns = patterns('',
     url(r'^nf_delete/(?P<pk>\d+)/$', 'vendas_produtos.views.nf_delete'),
     url(r'^vendas_produtos/$', 'vendas_produtos.views.vendas', name='vendas'),
     
-    url(r'^nf_form/(?P<pk>\d+)/$', 'vendas_produtos.views.nf_form'),
+    url(r'^nf_form2/(?P<pk>\d+)/$', 'vendas_produtos.views.nf_form2'),
     
     url(r'^$', 'vendas_produtos.views.home', name='home'),
     # url(r'^vendas/', include('vendas.foo.urls')),

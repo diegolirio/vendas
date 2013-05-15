@@ -103,8 +103,9 @@ def fornecedor_form(request, pk=None):
 	else:
 		if pk != '0':
 			f = Fornecedor.objects.get(pk=pk)
+		form = FornecedorForm()
 	return render_to_response('fornecedor_form.html', 
-	                          {'f': f, 'telefones': Telefone.objects.all()}, 
+	                          {'f': f, 'telefones': Telefone.objects.all(), 'form': form}, 
 	                          context_instance=RequestContext(request))
 	                          
 def fornecedor_delete(request, pk):

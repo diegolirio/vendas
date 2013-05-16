@@ -6,7 +6,7 @@
 		<h2>Vendas</h2>
 		
 		<form action="" method="POST"> {% csrf_token %}
-		
+
 			{% if form.numero.errors %}
 				{% for error in form.numero.errors %}
 					<div id="group-error" class="alert alert-error">
@@ -41,7 +41,7 @@
 					</div>
 				{% endfor %}
 			{% endif %} 			
-						
+					
 			<input type="hidden" id="id_id" name="id"/>
 			
 			<p>

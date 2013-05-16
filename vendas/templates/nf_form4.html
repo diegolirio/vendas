@@ -1,0 +1,74 @@
+{% extends '_base.html' %}
+
+{% block body %}
+
+	<div class="container">
+		<h2>Vendas</h2>
+		
+		<form action="" method="POST"> {% csrf_token %}
+
+			{{ form }}
+			
+			<br/>
+			
+			<input type="submit" value="Salvar" class="btn btn-primary"/>
+			<a href="/vendas_produtos/" class="btn">Cancelar</a>
+			<a href="#/nf_det/" class="btn pull-right">Finalizar venda</a>
+			
+		</form>
+		
+		<hr/>
+		
+		
+		{% if execute == 'UPDATE' %}
+			<a href="#" class="btn btn-info">Add Produto</a>
+		{% endif %}
+		
+		{% if items %}
+		
+		<h5 class="text-info">Produtos</h5>
+		<table class="table">
+			<thead>
+				<tr class="text-info">
+					<!--<td>ID</td>-->
+					<td>Código</td>
+					<td>Nome</td>
+					<td>Marca</td>
+					<td>Valor Unt.</td>
+					<td>Qtde</td>
+					<td>Valor</td>
+					<td>Ação</td>
+				</tr>
+			</thead>
+    		<tfoot>
+				<tr>
+					<!--<td></td>-->
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>{{ nf.valorTotal }}</td>
+					<td></td>
+				</tr>
+			</tfoot>			
+			{% for item in items %} 
+			<tr> 
+				<!--<td>{{ item.produto.id }}</td>-->
+				<td>{{ item.produto.codigo }}</td>
+				<td>{{ item.produto.nome }}</td>
+				<td>{{ item.produto.marca.nome }}</td>
+				<td>{{ item.produto.valor }}</td>
+				<td>{{ item.quantidade }}</td>
+				<td>{{ item.valorTotal }}</td>
+				<td><a href="#" title="Exluir Produto da Nota" onclick="alert('Em desenvolvimento');">Excluir</a></td>
+			</tr>
+			{% empty %}
+				<h3>Não há produtos relacionados na Nota Fiscal</h3>
+			{% endfor %}
+		</table>
+		
+		{% endif %}
+	</div>
+
+{% endblock %}

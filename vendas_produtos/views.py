@@ -6,6 +6,8 @@ from cliente.models import Telefone
 from produto.models import Produto
 from produto.models import Marca
 from vendas_produtos.forms import NotaFiscalForm
+from vendas_produtos.forms import NFForm
+from vendas_produtos.forms import NFForm2
 from django.template import RequestContext
 
 def home(request):
@@ -89,8 +91,35 @@ def nf_form3(request, pk):
 							)
 			#form.save()
 			nf.save()
+			return vendas(request)
 	else:
 		form = NFForm()
 	return render_to_response('nf_form3.html', 
 	                          {'nf':nf, 'clientes':clientes, 'form':form}, 
 	                          context_instance=RequestContext(request))
+	                          
+# ============================================================================#
+# = Form4 - Oficial															  #	                          
+# ============================================================================#
+def nf_form4(request, pk):		
+	execute = 'INSERT'
+	if request.method == 'POST':
+		if pk != '0':
+			nf = NotaFiscal.objects.get(pk=pk)
+			form = NFForm2(request.POST, request.FILES, instance=nf)
+		else:
+			form = NFForm2(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			execute = 'UPDATE'
+			return vendas(request)
+	else:
+		if pk != '0':	
+			nf = NotaFiscal.objects.get(pk=pk)
+			items = Items.objects.all().filter(nota=nf)
+			form = NFForm2(instance=nf)
+			execute = 'UPDATE'
+		else:
+			items = False		
+			form = NFForm2()
+	return render_to_response('nf_form4.html', {'form':form, 'items': items, 'execute': execute}, context_instance=RequestContext(request))

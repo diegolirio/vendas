@@ -71,3 +71,26 @@ def nf_form2(request, pk):
 		form = NotaFiscalForm()
 	return render_to_response('nf_form2.html', {'nf': nf, 'clientes': clientes, 'form': form}, context_instance=RequestContext(request))
 	
+def nf_form3(request, pk):
+	nf = NotaFiscal()
+	clientes = Cliente.objects.all()
+	if request.method == 'POST':
+		if pk != '0':
+			nf = NotaFiscal.objects.get(pk=pk)
+			form = NFForm(request.POST, request.FILES, instance=nf)
+		else:
+			form = NFForm(request.POST, request.FILES)
+		if form.is_valid():
+			dados = form.cleaned_data
+			nf = NotaFiscal(
+								numero=dados['numero'],
+								data=dados['data'],
+								cliente=dados['cliente']
+							)
+			#form.save()
+			nf.save()
+	else:
+		form = NFForm()
+	return render_to_response('nf_form3.html', 
+	                          {'nf':nf, 'clientes':clientes, 'form':form}, 
+	                          context_instance=RequestContext(request))

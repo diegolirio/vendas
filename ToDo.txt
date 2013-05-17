@@ -1,0 +1,20 @@
+--------------- NF --------------------
+
+- Colcoar novo campo em NotaFiscal, boolean -> NF Finalizada. 17/05/2013
+
+- Se NF finalizada bloquear Edição da NF, Add/remove Produto, Somente disponivel para visualização. 17/05/2013
+
+- Colocar na Table vendas.html condição para apontar somente para nf em modo visualizacao. 17/05/2013
+
+- Na nf_det.html no botao finalizar, imprimir NF (pesquisar possivel impressão, PDF ou outros modos) e preencher campo de NotaFiscal 		finalizado para verdadeiro. 17/05/2013
+
+- Add Produto no nf_det.html chamar um window.open (popup) para add Items da NF (nf "o mesmo da Tela", produto, quantidade)
+
+- Remover produto no mesmo table de produtos na table nf_det.html
+
+--------------- Usuário --------------------
+
+
+- Cadastro de usuário verificar se é possivel incluir campo, se sim incluir um campo url(de uma imagem) para gravar a url de uma foto do 	usúario. 17/05/2013
+
+- No cadastro de usuário tentar incluir este campo foto, e fazer um upload da foto para o servidor. processo habilitado somente após a 		inclusão do usúario. Já estando cadastrado habilitar um botao "add Foto", para possivel upload (sugestão - utilizar um window.open). 	17/05/2013

@@ -102,7 +102,6 @@ def nf_form3(request, pk):
 # = Form4 - Oficial															  #	                          
 # ============================================================================#
 def nf_form4(request, pk):		
-	#execute = 'INSERT'
 	if request.method == 'POST':
 		if pk != '0':
 			nf = NotaFiscal.objects.get(pk=pk)
@@ -112,15 +111,13 @@ def nf_form4(request, pk):
 			items = False
 			form = NFForm2(request.POST, request.FILES)
 		if form.is_valid():
-			form.save()
-			#execute = 'UPDATE'
-			return vendas(request)
+			nf_form = form.save()
+			return nf_det(request, nf_form.pk)
 	else:
 		if pk != '0':	
 			nf = NotaFiscal.objects.get(pk=pk)
 			items = Items.objects.all().filter(nota=nf)
 			form = NFForm2(instance=nf)
-			#execute = 'UPDATE'
 		else:
 			items = False		
 			form = NFForm2()

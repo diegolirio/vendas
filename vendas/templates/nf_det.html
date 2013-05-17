@@ -23,13 +23,20 @@
 			<div class="span3">
 				<p><span class="text-error">Data: </span>{{ nf.data }}</p>
 			</div>
-			<div class="span3">
-				<a href="/vendas_produtos/" class="btn">Voltar</a>
-				<a href="/nf_delete/{{ nf.id }}/" onclick="delete__(this.href); return false;" class="btn btn-danger">Excluir Nota</a>
-			</div>
 		</div>
 		
-		<br/><br/>
+		<br/>		
+		<div class="pull-right">
+			<a href="/vendas_produtos/" class="btn">Voltar</a>
+			<a href="/nf_delete/{{ nf.id }}/" onclick="delete__(this.href); return false;" class="btn btn-danger">Excluir Nota</a>
+			<a href="#/nf_print/" class="btn" onclick="alert('Print NF');">Finalizar venda</a>		
+		</div>
+		<div>
+			<a href="#/add_prod/" class="btn" onclick="alert('Add Produto');">Add Produto</a>		
+		</div>
+				
+		<br/>
+		
 		<h5 class="text-info">Produtos</h5>
 		<table class="table">
 			<thead>

@@ -22,7 +22,7 @@
 				<td>Cliente</td>
 				<td>Data</td>
 				<td>Valor NF</td>
-				<td></td>
+				<td>Ação</td>
 			</tr>
 			{% for nf in nfs %}
 			<tr>
@@ -31,8 +31,18 @@
 				<td>{{ nf.cliente.nome }}</td>
 				<td>{{ nf.data }}</td>
 				<td>R$ {{ nf.valorTotal }}</td>
-				<td><a href="/nf_det/{{ nf.id }}/" title="mais detalhes..."><i class="icon-share-alt"></i> Ver items...</a></td>
-				<td><a href="/nf_form4/{{ nf.id }}/" title="Editar..."><i class="icon-share-alt"></i> Edit...</a></td>
+				<td>
+					<div class="btn-group">
+					  <a class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#">
+						<i class="icon-cog"></i>
+						<span class="caret"></span>
+					  </a>
+					  <ul class="dropdown-menu">
+							<li><a href="/nf_det/{{ nf.id }}/" title="mais detalhes..."><i class="icon-share-alt"></i> Adicionar/Editar Items...</a></li>
+							<li><a href="/nf_form4/{{ nf.id }}/" title="Editar..."><i class="icon-share-alt"></i> Editar nf...</a></li>
+					  </ul>
+					</div>		
+				</td>				
 			</tr>		
 			{% endfor %}
 		</table>

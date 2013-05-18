@@ -28,11 +28,19 @@
 		<br/>		
 		<div class="pull-right">
 			<a href="/vendas_produtos/" class="btn">Voltar</a>
-			<a href="/nf_delete/{{ nf.id }}/" onclick="delete__(this.href); return false;" class="btn btn-danger">Excluir Nota</a>
-			<a href="#myModal" role="button" class="btn btn-success" data-toggle="modal">Finalizar venda</a>		
+			{% if nf.finalizada %}
+				<a href="/nf_print/{{nf.id}}/" class="btn" target="_blank">Imprimir</a>
+			{% else %}
+				<a href="/nf_delete/{{ nf.id }}/" onclick="delete__(this.href); return false;" class="btn btn-danger">Excluir Nota</a>
+				<a href="#myModal" role="button" class="btn btn-success" data-toggle="modal">Finalizar venda</a>		
+			{% endif %}
 		</div>
 		<div>
-			<a href="/add_prod/{{nf.id}}/" class="btn" onclick="delete__(this.href); return false;">Add Produto</a>		
+			{% if not nf.finalizada %}
+				<a href="/add_prod/{{nf.id}}/" class="btn btn-inverse" onclick="delete__(this.href); return false;">Add Produto</a>		
+			{% else %}
+				<h4 class="text-error">Nota Finalizada</h4>
+			{% endif %}
 		</div>
 		
 		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -64,7 +72,9 @@
 					<td>Valor Unt.</td>
 					<td>Qtde</td>
 					<td>Valor</td>
-					<td>Ação</td>
+					{% if not nf.finalizada %}
+						<td>Ação</td>
+					{% endif %}
 				</tr>
 			</thead>
     		<tfoot>
@@ -75,8 +85,10 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td>{{ nf.valorTotal }}</td>
-					<td></td>
+					<td>R$  {{ nf.valorTotal }}</td>
+					{% if not nf.finalizada %}
+						<td></td>
+					{% endif %}
 				</tr>
 			</tfoot>			
 			{% for item in items %} 
@@ -87,8 +99,10 @@
 				<td>{{ item.produto.marca.nome }}</td>
 				<td>{{ item.produto.valor }}</td>
 				<td>{{ item.quantidade }}</td>
-				<td>{{ item.valorTotal }}</td>
-				<td><a href="#" title="Exluir Produto da Nota" onclick="alert('Em desenvolvimento');">Excluir</a></td>
+				<td>R$ {{ item.valorTotal }}</td>
+				{% if not nf.finalizada %}
+					<td><a href="/nf_produto_delete/{{item.id}}/" title="Exluir Produto da Nota" onclick="delete__(this.href); return false;">Excluir</a></td>
+				{% endif %}
 			</tr>
 			{% empty %}
 				<h3>Não há produtos relacionados na Nota Fiscal</h3>
@@ -96,4 +110,5 @@
 		</table>
 		
 	</div>
+	
 {% endblock %}

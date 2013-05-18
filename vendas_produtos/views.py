@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+
 from django.shortcuts import render_to_response
 from vendas_produtos.models import NotaFiscal
 from vendas_produtos.models import Items
@@ -126,6 +128,7 @@ def nf_form4(request, pk):
 
 def add_prod(request, pk):
 	nf = NotaFiscal.objects.get(pk=pk)
+	produtos = Produto.objects.all()
 	delected = 'N'
 	if request.method == 'POST':
 		form = ItemsForm(request.POST, request.FILES)
@@ -135,5 +138,25 @@ def add_prod(request, pk):
 	else:
 		form = ItemsForm(instance=nf)
 	return render_to_response('nf_add_prod.html', 
-	                          {'nf': nf, 'form': form, 'delected': delected}, 
+	                          {'nf': nf, 'form': form, 'produtos': produtos, 'delected': delected}, 
 	                          context_instance=RequestContext(request))
+
+def nf_finalizar(request, pk):
+	nf = NotaFiscal.objects.get(pk=pk)
+	nf.finalizada = True
+	nf.save()
+	return nf_det(request, pk)
+
+def nf_print(request, pk):
+	nf = NotaFiscal.objects.all()
+	#return render_to_response('nf_print.html', {'nf': nf})
+	return render_to_response('teste.pdf', {'nf': nf})
+
+def nf_produto_delete(request, pk):
+	item = Items.objects.get(pk=pk)
+	delected = 'N'
+	if request.method == 'POST':
+		item.delete()
+		delected = 'S'
+	#nf = item.nota
+	return render_to_response('nf_produto_delete.html', {'item': item, 'delected': delected}, context_instance=RequestContext(request))

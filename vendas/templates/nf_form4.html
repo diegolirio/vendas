@@ -36,7 +36,6 @@
 					<td>Valor Unt.</td>
 					<td>Qtde</td>
 					<td>Valor</td>
-					<td>Ação</td>
 				</tr>
 			</thead>
     		<tfoot>
@@ -48,7 +47,6 @@
 					<td></td>
 					<td></td>
 					<td>{{ nf.valorTotal }}</td>
-					<td></td>
 				</tr>
 			</tfoot>			
 			{% for item in items %} 
@@ -60,7 +58,6 @@
 				<td>{{ item.produto.valor }}</td>
 				<td>{{ item.quantidade }}</td>
 				<td>{{ item.valorTotal }}</td>
-				<td><a href="#" title="Exluir Produto da Nota" onclick="alert('Em desenvolvimento');">Excluir</a></td>
 			</tr>
 			{% empty %}
 				<h3>Não há produtos relacionados na Nota Fiscal</h3>

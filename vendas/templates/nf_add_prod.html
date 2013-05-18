@@ -2,9 +2,9 @@
 
 {% block body %}
 
+	<br/><br/>
 	
-	
-	<h3>NF: {{ nf.numero }}</h3>
+	<h3 class="text-warning">NF: {{ nf.numero }}</h3>
 	Data:
 	<p>{{ nf.data }}</p>
 	Cliente:
@@ -37,10 +37,9 @@
 			{% endif %} 					
 			<select name="produto" id="id_produto">
 				<option value="" selected="selected">---------</option>
-				
-				<option value="1">1: Notebook 15&#39; AMD 320GB - HP</option>
-				<option value="2">2: Impressora - HP</option>
-				<option value="3">3: Monitor 17&#39; - DELL</option>
+				{% for p in produtos %}
+					<option value="{{ p.id }}">{{ p.nome }}</option>
+				{% endfor %}
 			</select>
 		</p> 
 		<p>
@@ -56,7 +55,7 @@
 			<input type="text" name="quantidade" id="id_quantidade" />
 		</p>	
 		
-		<input type="submit" value="Add" name="save" class="btn"/>
+		<input type="submit" value="Add" name="save" class="btn btn-success"/>
 		<a href="#" onclick="close__('N');" class="btn">Cancelar</a>
 		
 	</form>

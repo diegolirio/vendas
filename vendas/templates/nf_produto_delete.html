@@ -1,0 +1,25 @@
+{% extends '_base_simple.html' %}
+
+{% block body %}
+	
+	<br/><br/>
+	
+	<h1 class="text-error">Deseja realmente excluir ?</h1>
+	
+	<br/>
+	
+	<h2 class="text-warning">Item</h2>
+	
+	<br/>
+	
+	<form action="" method="POST"> {% csrf_token %}
+		<h4>{{item.produto.nome}}</h4>
+		<p> Quantidade: {{item.quantidade}}</p>
+		
+		<br/>
+		
+		<input type="submit" class="btn btn-primary" value="Excluir"/>
+		<a href="#" class="btn" onclick="close__('N');">Cancelar</a>
+	</form>
+	
+{% endblock %}

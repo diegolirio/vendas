@@ -22,6 +22,7 @@
 				<td>Cliente</td>
 				<td>Data</td>
 				<td>Valor NF</td>
+				<td>Finalizada</td>
 				<td>Ação</td>
 			</tr>
 			{% for nf in nfs %}
@@ -31,6 +32,7 @@
 				<td>{{ nf.cliente.nome }}</td>
 				<td>{{ nf.data }}</td>
 				<td>R$ {{ nf.valorTotal }}</td>
+				<td>{{ nf.finalizada }}</td>
 				<td>
 					<div class="btn-group">
 					  <a class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#">
@@ -38,8 +40,12 @@
 						<span class="caret"></span>
 					  </a>
 					  <ul class="dropdown-menu">
+						  {% if nf.finalizada %}						
+						    <li><a href="/nf_final/{{ nf.id }}/" title="Visualizar..."><i class="icon-share-alt"></i> Visualizar nf...</a></li>
+						  {% else %}
 							<li><a href="/nf_det/{{ nf.id }}/" title="mais detalhes..."><i class="icon-share-alt"></i> Adicionar/Editar Items...</a></li>
 							<li><a href="/nf_form4/{{ nf.id }}/" title="Editar..."><i class="icon-share-alt"></i> Editar nf...</a></li>
+						  {% endif %}
 					  </ul>
 					</div>		
 				</td>				

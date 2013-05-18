@@ -2,6 +2,10 @@ from django import forms
 from django.forms import ModelForm
 from vendas_produtos.models import *
 
+class ItemsForm(ModelForm):
+	class Meta:
+		model = Items
+
 class NFForm(ModelForm):
 	numero = forms.IntegerField()   
 	#cliente = forms.ForeignKey(Cliente) 

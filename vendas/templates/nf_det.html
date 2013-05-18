@@ -29,11 +29,27 @@
 		<div class="pull-right">
 			<a href="/vendas_produtos/" class="btn">Voltar</a>
 			<a href="/nf_delete/{{ nf.id }}/" onclick="delete__(this.href); return false;" class="btn btn-danger">Excluir Nota</a>
-			<a href="#/nf_print/" class="btn" onclick="alert('Print NF');">Finalizar venda</a>		
+			<a href="#myModal" role="button" class="btn btn-success" data-toggle="modal">Finalizar venda</a>		
 		</div>
 		<div>
-			<a href="#/add_prod/" class="btn" onclick="alert('Add Produto');">Add Produto</a>		
+			<a href="/add_prod/{{nf.id}}/" class="btn" onclick="delete__(this.href); return false;">Add Produto</a>		
 		</div>
+		
+		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+					<h5 id="myModalLabel">Finalizar</h5>
+			</div>
+			<div class="modal-body">
+				  <p>
+						Deseja realmente Finalizar nota: {{ nf.numero }}
+				  </p>
+			</div>
+			<div class="modal-footer">
+				<a href="/nf_finalizar/{{nf.id}}" class="btn btn-success">Sim</a>
+				<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Não</button>
+			</div>
+		</div>		
 				
 		<br/>
 		

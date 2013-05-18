@@ -14,6 +14,7 @@ class NotaFiscal(models.Model):
 	numero = models.IntegerField() 
 	data = models.DateField()
 	cliente = models.ForeignKey(Cliente)
+	finalizada = models.BooleanField()
 	items = models.ManyToManyField(Produto, through='Items') #, blank=True,null=True)
 	#produtos =  models.ManyToManyField(Produto)
 	#usuarioGerou =  models.ForeignKey(User)

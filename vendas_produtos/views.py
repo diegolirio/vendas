@@ -8,6 +8,7 @@ from produto.models import Marca
 from vendas_produtos.forms import NotaFiscalForm
 from vendas_produtos.forms import NFForm
 from vendas_produtos.forms import NFForm2
+from vendas_produtos.forms import ItemsForm
 from django.template import RequestContext
 
 def home(request):
@@ -122,3 +123,17 @@ def nf_form4(request, pk):
 			items = False		
 			form = NFForm2()
 	return render_to_response('nf_form4.html', {'form':form, 'items': items}, context_instance=RequestContext(request))
+
+def add_prod(request, pk):
+	nf = NotaFiscal.objects.get(pk=pk)
+	delected = 'N'
+	if request.method == 'POST':
+		form = ItemsForm(request.POST, request.FILES)
+		if form.is_valid(): 
+			form.save()
+			delected = 'S'
+	else:
+		form = ItemsForm(instance=nf)
+	return render_to_response('nf_add_prod.html', 
+	                          {'nf': nf, 'form': form, 'delected': delected}, 
+	                          context_instance=RequestContext(request))

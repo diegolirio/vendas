@@ -20,6 +20,9 @@ urlpatterns = patterns('',
 	url(r'^user_edit/(?P<pk>\d+)/$', 'usuario.views.user_edit'),
 	url(r'^user_delete/(?P<pk>\d+)/$', 'usuario.views.user_delete'),
 	
+	# UsersPlus
+	url(r'^userPlus_edit/(?P<pk>\d+)/$', 'usuario.views.userPlus_edit'),
+	
 	# ------ Clientes ------
     url(r'^clientes/$', 'cliente.views.clientes', name='clientes'),  
 	url(r'^cliente_new/$', 'cliente.views.cliente_new'),

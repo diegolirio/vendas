@@ -14,6 +14,12 @@
 			<a href="/users/" class="btn">Cancelar</a> 
 		</form>
 		
+		<hr/>
+		
+		{% if foto != 'S' %}
+			<a href="/userPlus_edit/{{user.id}}" class="btn">Add Foto</a><br/>
+			<a href="/userPlus_edit/{{user.id}}"><img src="/media/{{ userPlus.foto }}"/></a>
+		{% endif %}
 	</div>
 	
 	

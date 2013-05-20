@@ -2,7 +2,9 @@
 
 from django.shortcuts import render_to_response
 #from usuario.models import Usuario
+from usuario.models import UserPlus
 #from usuario.forms import UsuarioForm
+from usuario.forms import UserPlusForm
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -83,6 +85,7 @@ def user_new(request):
 
 def user_edit(request, pk):
 	user = User.objects.get(pk=pk)
+	userPlus = UserPlus.objects.get(user=user)
 	if request.method == 'POST':
 		form = UserForm(request.POST, request.FILES, instance=user)
 		if form.is_valid():
@@ -90,7 +93,7 @@ def user_edit(request, pk):
 			return users(request)
 	else:
 		form = UserForm(instance=user)
-	return render_to_response('user_edit.html', {'form': form}, context_instance=RequestContext(request))
+	return render_to_response('user_edit.html', {'form': form, 'user': user, 'userPlus': userPlus}, context_instance=RequestContext(request))
 
 def user_delete(request, pk):
 	u = User.objects.get(pk=pk)
@@ -99,4 +102,25 @@ def user_delete(request, pk):
 		u.delete()
 		delected = 'S'
 	return render_to_response('user_delete.html', {'user': u, 'delected': delected}, context_instance=RequestContext(request))
+
+def userPlus_edit(request, pk):
+	#userPlus = UserPlus.objects.get(pk=pk)
+	user = User.objects.get(pk=pk)
+	userPlus = UserPlus.objects.get(user=user)
+	if request.method == 'POST':
+		form = UserPlusForm(request.POST, request.FILES, instance=userPlus)
+		if form.is_valid():
+			form.save() 
+			return users(request)
+	else:
+		form = UserPlusForm(instance=userPlus)
+	return render_to_response('user_edit.html', {'form': form, 'foto': 'S'}, context_instance=RequestContext(request))
+
+def userPlus_delete(request, pk):
+	u = UserPlus.objects.get(pk=pk)
+	delected = 'N'
+	if request.method == 'POST': 
+		u.delete()
+		delected = 'S'
+	return render_to_response('user_delete.html', {'user': u, 'foto': 'S', 'delected': delected}, context_instance=RequestContext(request))	
 		

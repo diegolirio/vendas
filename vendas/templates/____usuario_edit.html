@@ -1,0 +1,40 @@
+{% extends '_base.html' %}
+
+{% block body %}
+
+	<script type="text/javascript">
+		$('.close').click(function() {		
+			$("#alert").alert('close');
+		});	
+	</script>
+
+	<br/><br/><br/>
+	
+	<div class="container">
+		<h1>Cadastro de Usuário (Alteração)</h1>
+		<br/>
+		
+		<div class=row>
+			{% if msg != "" %}
+				<div class="span5" id="alert">
+				  <div class="alert alert-success">
+					<a class="close">&times;</a>
+					<strong>{{ msg }}</strong>
+				  </div>
+				</div>			
+			{% endif %}
+		</div>		
+		<div class="row">
+			
+			<form method="POST"> {% csrf_token %}
+				{{ form.as_p }}	
+				<a href="/usuarios/" class="btn">Voltar</a> 
+				<button type="submit" class="btn btn-success"> Salvar alteração</button>
+				<a href="/usuario_new/" class="btn">Novo</a> 
+				<a href="/usuarios/" class="btn">Cancelar</a> 
+			</form>
+		</div>
+	</div>
+
+
+{% endblock %}	

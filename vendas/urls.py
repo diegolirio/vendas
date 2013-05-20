@@ -9,10 +9,10 @@ urlpatterns = patterns('',
     # Examples:'),
     
     # Usuarios
-    url(r'^usuarios/$', 'usuario.views.getAllUsuarios', name='usuarios'),  
-    url(r'^usuario_new/$', 'usuario.views.new', name='new_user'),  
-	url(r'^usuario_edit/(?P<pk>\d+)/$', 'usuario.views.edit'),
-	url(r'^usuario_delete/(?P<pk>\d+)/$', 'usuario.views.usuario_delete'),
+    #url(r'^usuarios/$', 'usuario.views.getAllUsuarios', name='usuarios'),  
+    #url(r'^usuario_new/$', 'usuario.views.new', name='new_user'),  
+	#url(r'^usuario_edit/(?P<pk>\d+)/$', 'usuario.views.edit'),
+	#url(r'^usuario_delete/(?P<pk>\d+)/$', 'usuario.views.usuario_delete'),
 	
 	# Users
 	url(r'^users/$', 'usuario.views.users'),

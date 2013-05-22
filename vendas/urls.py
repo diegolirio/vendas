@@ -22,6 +22,7 @@ urlpatterns = patterns('',
 	
 	# UsersPlus
 	url(r'^userPlus_edit/(?P<pk>\d+)/$', 'usuario.views.userPlus_edit'),
+	url(r'^userPlus_delete/(?P<pk>\d+)/$', 'usuario.views.userPlus_delete'),
 	
 	# ------ Clientes ------
     url(r'^clientes/$', 'cliente.views.clientes', name='clientes'),  

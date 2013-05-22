@@ -86,7 +86,11 @@ def user_new(request):
 
 def user_edit(request, pk):
 	user = User.objects.get(pk=pk)
-	userPlus = UserPlus.objects.get(user=user)
+	userPlus = UserPlus()
+	try:
+		userPlus = UserPlus.objects.get(user=user)
+	except:
+		userPlus = UserPlus()
 	if request.method == 'POST':
 		form = UserForm(request.POST, request.FILES, instance=user)
 		if form.is_valid():
@@ -107,21 +111,40 @@ def user_delete(request, pk):
 def userPlus_edit(request, pk):
 	#userPlus = UserPlus.objects.get(pk=pk)
 	user = User.objects.get(pk=pk)
-	userPlus = UserPlus.objects.get(user=user)
+	try:
+		userPlus = UserPlus.objects.get(user=user)
+	except:
+		userPlus = UserPlus()
+	#print("Foto >>>>>" + userPlus.foto.url)
 	if request.method == 'POST':
-		form = UserPlusForm(request.POST, request.FILES, instance=userPlus)
+		#if userPlus.foto == 
+		try:
+			if userPlus.pk > 0:
+				form = UserPlusForm(request.POST, request.FILES, instance=userPlus)
+			else:
+				form = UserPlusForm(request.POST, request.FILES)
+		except:
+			form = UserPlusForm(request.POST, request.FILES)				
 		if form.is_valid():
 			form.save() 
-			return redirect('user_edit')
+			return redirect('user_edit', pk=user.pk)
 	else:
-		form = UserPlusForm(instance=userPlus)
+		if userPlus.pk > 0:
+			form = UserPlusForm(instance=userPlus)
+		else:
+			form = UserPlusForm()
 	return render_to_response('user_edit.html', {'form': form, 'foto': 'S', 'userPlus': userPlus}, context_instance=RequestContext(request))
 
 def userPlus_delete(request, pk):
 	u = UserPlus.objects.get(pk=pk)
-	delected = 'N'
-	if request.method == 'POST': 
-		u.delete()
-		delected = 'S'
-	return render_to_response('user_delete.html', {'user': u, 'foto': 'S', 'delected': delected}, context_instance=RequestContext(request))	
+	user = u.user
+	#delected = 'N'
+	#if request.method == 'POST': 
+	u.delete()
+	
+	form = UserPlusForm()
+	userPlus = UserPlus()
+	#	delected = 'S'
+	#return render_to_response('user_delete.html', {'user': u, 'foto': 'S', 'delected': delected}, context_instance=RequestContext(request))	
+	return render_to_response('user_edit.html', {'form': form, 'foto': 'S', 'userPlus': userPlus}, context_instance=RequestContext(request))
 		

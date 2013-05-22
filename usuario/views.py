@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 from django.shortcuts import render_to_response
+from django.shortcuts import redirect
 #from usuario.models import Usuario
 from usuario.models import UserPlus
 #from usuario.forms import UsuarioForm
@@ -78,7 +79,7 @@ def user_new(request):
 		form = UserForm(request.POST, request.FILES)
 		if form.is_valid():
 			form.save()
-			return users(request)
+			return redirect('users')
 	else:
 		form = UserForm()
 	return render_to_response('user_new.html', {'form': form}, context_instance=RequestContext(request))	
@@ -90,7 +91,7 @@ def user_edit(request, pk):
 		form = UserForm(request.POST, request.FILES, instance=user)
 		if form.is_valid():
 			form.save()
-			return users(request)
+			return redirect('users')
 	else:
 		form = UserForm(instance=user)
 	return render_to_response('user_edit.html', {'form': form, 'user': user, 'userPlus': userPlus}, context_instance=RequestContext(request))
@@ -111,10 +112,10 @@ def userPlus_edit(request, pk):
 		form = UserPlusForm(request.POST, request.FILES, instance=userPlus)
 		if form.is_valid():
 			form.save() 
-			return users(request)
+			return redirect('user_edit')
 	else:
 		form = UserPlusForm(instance=userPlus)
-	return render_to_response('user_edit.html', {'form': form, 'foto': 'S'}, context_instance=RequestContext(request))
+	return render_to_response('user_edit.html', {'form': form, 'foto': 'S', 'userPlus': userPlus}, context_instance=RequestContext(request))
 
 def userPlus_delete(request, pk):
 	u = UserPlus.objects.get(pk=pk)

@@ -8,6 +8,12 @@
 		<h1>Cadastro de Usuario (Alteração)</h1>
 		<br/>
 		
+		<a href="/userPlus_edit/{{user.id}}"><img src="{{userPlus.foto.url}}" width="100" height="100"></img></a>
+		<!-- Inclusao de foto S=SIM-->
+		{% if foto != 'S' %}
+			<a href="/userPlus_edit/{{user.id}}" class="btn">Foto</a><br/>
+		{% endif %}		
+		
 		<form method="POST" action=""> {% csrf_token %}
 			{{ form.as_p }}
 			<input type="submit" value="Salvar alteração" class="btn btn-success"/>
@@ -15,11 +21,7 @@
 		</form>
 		
 		<hr/>
-		
-		{% if foto != 'S' %}
-			<a href="/userPlus_edit/{{user.id}}" class="btn">Add Foto</a><br/>
-			<a href="/userPlus_edit/{{user.id}}"><img src="/media/{{ userPlus.foto }}"/></a>
-		{% endif %}
+
 	</div>
 	
 	

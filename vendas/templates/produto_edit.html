@@ -8,9 +8,13 @@
 		<h1>Cadastro de Produto (Alteração)</h1>
 		<br/>
 		
-		<form action="" method="POST"> {% csrf_token %}
+		<form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 		
 			{{ form.as_p }}
+			
+			<img src="/media/{{form.foto.value}}"/>
+			
+			<br/>			
 			
 			<input type="submit" value="Salvar alteração" class="btn btn-success" name="save"/>
 			<a href="/produtos/" class="btn">Cancelar</a>

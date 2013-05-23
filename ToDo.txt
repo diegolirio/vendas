@@ -15,6 +15,10 @@ OK - Remover produto no mesmo table de produtos na table nf_det.html
 --------------- Usuário --------------------
 
 
->>> - Cadastro de usuário verificar se é possivel incluir campo, se sim incluir um campo url(de uma imagem) para gravar a url de uma foto do 	usúario. 17/05/2013
+OK (incluso um ImageField) >>> - Cadastro de usuário verificar se é possivel incluir campo, se sim incluir um campo url(de uma imagem) para gravar a url de uma foto do 	usúario. 17/05/2013
 
->>> - No cadastro de usuário tentar incluir este campo foto, e fazer um upload da foto para o servidor. processo habilitado somente após a 		inclusão do usúario. Já estando cadastrado habilitar um botao "add Foto", para possivel upload (sugestão - utilizar um window.open). 	17/05/2013
+OK >>> - No cadastro de usuário tentar incluir este campo foto, e fazer um upload da foto para o servidor. processo habilitado somente após a inclusão do usúario. Já estando cadastrado habilitar um botao "add Foto", para possivel upload (sugestão - utilizar um window.open). 	17/05/2013
+
+>>> Criar histórico de fotos do perfil do usuario.
+
+>>> Após Excluir Foto excluir também o arquivo. Realizar pergunta antes.

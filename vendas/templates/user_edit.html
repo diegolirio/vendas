@@ -20,6 +20,8 @@
 			<a href="/userPlus_delete/{{userPlus.id}}">Excluir</a>
 		{% endif %}				
 		
+		<br/>
+		
 		<form method="POST" action="" enctype="multipart/form-data"> {% csrf_token %}
 			
 			<input type="hidden" value="{{user.id}}" name="user"/>

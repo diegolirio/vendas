@@ -21,8 +21,14 @@
 		
 		</form>
 		
-		<a href="/produto_fotos/{{ produto.id }}">Fotos</a>
 		
+		
+		<a href="/produto_fotos/{{ produto.id }}">
+			Mais Fotos (Adicionar/Alterar)<br/><br/>
+		</a>
+		
+		<a href="javascript:void" onclick="alert('LitghBox');"><img src="{{foto_main.foto.url}}"/></a>
+
 		
 	</div>
 {% endblock %}

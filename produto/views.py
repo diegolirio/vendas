@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response
+from django.shortcuts import redirect
 from produto.models import Produto
 from produto.models import FotoProduto
 from produto.models import Marca
@@ -6,6 +7,7 @@ from produto.models import Fornecedor
 from cliente.models import Telefone
 from produto.forms import MarcaForm
 from produto.forms import ProdutoForm
+from produto.forms import FotoProdutoForm
 from produto.forms import FornecedorForm
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
@@ -22,8 +24,9 @@ def produto_new(request):
 	if request.method == 'POST':
 		form = ProdutoForm(request.POST, request.FILES)
 		if form.is_valid():
-			form.save()
-			return produtos(request)
+			p = form.save()
+			#return produtos(request)			
+			return redirect('/produto_edit/'+str(p.pk))
 	else:
 		p = Produto()
 		form = ProdutoForm(instance=p)
@@ -31,6 +34,10 @@ def produto_new(request):
 		
 def produto_edit(request, pk):
 	p = Produto.objects.get(pk=pk)
+	#try:
+	foto_main = FotoProduto.objects.filter(produto=p, principal=True).get()
+	#except:
+	#	foto_principal = FotoProduto()
 	if request.method == 'POST':
 		form = ProdutoForm(request.POST, request.FILES, instance=p)
 		if form.is_valid():
@@ -38,7 +45,7 @@ def produto_edit(request, pk):
 			return produtos(request)
 	else:
 		form = ProdutoForm(instance=p)
-	return render_to_response('produto_edit.html', {'form': form, 'produto': p}, context_instance=RequestContext(request)) 
+	return render_to_response('produto_edit.html', {'form': form, 'produto': p, 'foto_main': foto_main}, context_instance=RequestContext(request)) 
 		
 def produto_delete(request, pk):
 	p = Produto.objects.get(pk=pk)
@@ -51,7 +58,19 @@ def produto_delete(request, pk):
 def produto_fotos(request, pk):
 	p = Produto.objects.get(pk=pk)
 	fotos = FotoProduto.objects.filter(produto=p)
-	return render_to_response('produto_fotos.html', {'produto': p, 'fotos': fotos})		
+	form = FotoProdutoForm()
+	if request.method == 'POST':
+		form = FotoProdutoForm(request.POST, request.FILES)
+		if form.is_valid():
+			if bool(form['principal'].value) == True:
+				for f in fotos:
+					f.principal = False
+					f.save()
+			form.save()
+			form = FotoProdutoForm()
+			fotos = FotoProduto.objects.filter(produto=p)
+			request.method = 'GET'
+	return render_to_response('produto_fotos.html', {'produto': p, 'fotos': fotos, 'form': form}, context_instance=RequestContext(request))		
 	
 def marcas(request):
 	marcas = Marca.objects.all()

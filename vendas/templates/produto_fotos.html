@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+
+{% block body %}
+	
+	<div class="container">
+		<br/><br/>
+		
+		<h3> Cadastrar Nova Foto para "{{ produto.nome }}"</h3>
+		
+		<form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+			{{ form.as_p }}
+			
+			<input type="submit" class="btn" value="Salvar"/>
+			<a href="/produto_edit/{{produto.id}}">Cancelar</a>
+			
+		</form>
+		
+		<br/>
+		<h1>Fotos</h1>
+	
+		{% for f in fotos %}
+			<img src="{{f.foto.url}}" title="{{f.principal}}"/>
+		{% endfor %}
+
+
+		
+	</div>
+{% endblock %}

@@ -2,7 +2,24 @@
 
 {% block body %}
 	
+	<!-- Asisco LightBox CSS -->
+	<link rel="stylesheet" type="text/css" href="/media/gallery/lightbox/asisco/lightbox_display/css/prettyPhoto.css" />
+	<!-- jQuery Library (skip this step if already called on page ) -->
+	<script type="text/javascript" src="/media/gallery/lightbox/asisco/lightbox_display/js/jquery.min.js"></script> <!-- (do not call twice) -->
+	<!-- v LightBox JS -->
+	<script type="text/javascript" src="/media/gallery/lightbox/asisco/lightbox_display/js/jquery.prettyPhoto.js"></script>
+	<!-- Asisco LightBox Settings -->
+	<script type="text/javascript">
+	$(function(){
+		$("a[rel^='prettyPhoto']").prettyPhoto({
+			social_tools: false,
+		});
+	});
+	</script>
+		
+	
 	<div class="container">
+		
 		<br/><br/>
 		
 		<h3> Cadastrar Nova Foto para "{{ produto.nome }}"</h3>
@@ -18,8 +35,17 @@
 		<br/>
 		<h1>Fotos</h1>
 	
-		{% for f in fotos %}
-			<img src="{{f.foto.url}}" title="{{f.principal}}"/>
+		{% for f in fotos %} 
+		<!-- Asisco LightBox:Inline Start -->
+			<a href="#inline-f" rel="prettyPhoto[inline]"><img src="{{ f.foto.url }}" /></a>
+			<div id="inline-f" style="display:none;">
+				<img src="{{f.foto.url}}"/>
+				<form action="" method="POST">
+					{{ form.principal }}
+				</form>
+				<a hfre="" class="btn-inverse">Opções</a>
+			</div>
+		<!-- Asisco LightBox:Inline End -->		
 		{% endfor %}
 
 

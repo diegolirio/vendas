@@ -69,7 +69,6 @@ def produto_fotos(request, pk):
 			form.save()
 			form = FotoProdutoForm()
 			fotos = FotoProduto.objects.filter(produto=p)
-			request.method = 'GET'
 	return render_to_response('produto_fotos.html', {'produto': p, 'fotos': fotos, 'form': form}, context_instance=RequestContext(request))		
 	
 def marcas(request):

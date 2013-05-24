@@ -2,6 +2,25 @@
 
 {% block body %}
 
+
+	<!-- Asisco LightBox CSS -->
+	<link rel="stylesheet" type="text/css" href="/media/gallery/lightbox/asisco/lightbox_display/css/prettyPhoto.css" />
+	<!-- jQuery Library (skip this step if already called on page ) -->
+	<script type="text/javascript" src="/media/gallery/lightbox/asisco/lightbox_display/js/jquery.min.js"></script> <!-- (do not call twice) -->
+	<!-- v LightBox JS -->
+	<script type="text/javascript" src="/media/gallery/lightbox/asisco/lightbox_display/js/jquery.prettyPhoto.js"></script>
+	<!-- Asisco LightBox Settings -->
+	<script type="text/javascript">
+	$(function(){
+		$("a[rel^='prettyPhoto']").prettyPhoto({
+			social_tools: false,
+		});
+	});
+	</script>
+
+
+
+
 	<div class="container">
 		<br/><br/><br/>
 		
@@ -26,8 +45,13 @@
 		<a href="/produto_fotos/{{ produto.id }}">
 			Mais Fotos (Adicionar/Alterar)<br/><br/>
 		</a>
-		
-		<a href="javascript:void" onclick="alert('LitghBox');"><img src="{{foto_main.foto.url}}"/></a>
+	
+		<!-- Asisco LightBox:Inline Start -->
+			<a href="#inline-2" rel="prettyPhoto[inline]"><img src="{{foto_main.foto.url}}" height="200" width="250"/></a>
+			<div id="inline-2" style="display:none;">
+				<img src="{{foto_main.foto.url}}"/>
+			</div>
+		<!-- Asisco LightBox:Inline End -->		
 
 		
 	</div>

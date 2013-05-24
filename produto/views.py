@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from produto.models import Produto
+from produto.models import FotoProduto
 from produto.models import Marca
 from produto.models import Fornecedor
 from cliente.models import Telefone
@@ -37,7 +38,7 @@ def produto_edit(request, pk):
 			return produtos(request)
 	else:
 		form = ProdutoForm(instance=p)
-	return render_to_response('produto_edit.html', {'form': form}, context_instance=RequestContext(request)) 
+	return render_to_response('produto_edit.html', {'form': form, 'produto': p}, context_instance=RequestContext(request)) 
 		
 def produto_delete(request, pk):
 	p = Produto.objects.get(pk=pk)
@@ -47,6 +48,10 @@ def produto_delete(request, pk):
 		delected = 'S'
 	return render_to_response('produto_delete.html', {'produto': p, 'delected': delected}, context_instance=RequestContext(request))
 		
+def produto_fotos(request, pk):
+	p = Produto.objects.get(pk=pk)
+	fotos = FotoProduto.objects.filter(produto=p)
+	return render_to_response('produto_fotos.html', {'produto': p, 'fotos': fotos})		
 	
 def marcas(request):
 	marcas = Marca.objects.all()

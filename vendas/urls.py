@@ -19,6 +19,7 @@ urlpatterns = patterns('',
 	url(r'^user_new/$', 'usuario.views.user_new'),
 	url(r'^user_edit/(?P<pk>\d+)/$', 'usuario.views.user_edit', name='user_edit'),
 	url(r'^user_delete/(?P<pk>\d+)/$', 'usuario.views.user_delete'),
+	url(r'^user_fotos/(?P<pk>\d+)/$', 'usuario.views.user_fotos'),
 	
 	# UsersPlus
 	url(r'^userPlus_edit/(?P<pk>\d+)/$', 'usuario.views.userPlus_edit'),
@@ -41,6 +42,7 @@ urlpatterns = patterns('',
     url(r'^produto_new/$', 'produto.views.produto_new'),
     url(r'^produto_edit/(?P<pk>\d+)/$', 'produto.views.produto_edit'),
     url(r'^produto_delete/(?P<pk>\d+)/$', 'produto.views.produto_delete'),
+    url(r'^produto_fotos/(?P<pk>\d+)/$', 'produto.views.produto_fotos'),
     
     # ------ Nfs ------
     url(r'^nf_new/$', 'vendas_produtos.views.nf_new'),

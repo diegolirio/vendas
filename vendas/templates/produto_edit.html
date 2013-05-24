@@ -12,7 +12,7 @@
 		
 			{{ form.as_p }}
 			
-			<img src="/media/{{form.foto.value}}"/>
+			<!--<img src="/media/{{form.foto.value}}"/>-->
 			
 			<br/>			
 			
@@ -20,6 +20,9 @@
 			<a href="/produtos/" class="btn">Cancelar</a>
 		
 		</form>
+		
+		<a href="/produto_fotos/{{ produto.id }}">Fotos</a>
+		
 		
 	</div>
 {% endblock %}

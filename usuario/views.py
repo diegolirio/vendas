@@ -148,3 +148,8 @@ def userPlus_delete(request, pk):
 	#return render_to_response('user_delete.html', {'user': u, 'foto': 'S', 'delected': delected}, context_instance=RequestContext(request))	
 	return render_to_response('user_edit.html', {'form': form, 'foto': 'S', 'userPlus': userPlus}, context_instance=RequestContext(request))
 		
+def user_fotos(request, pk):
+	user = User.objects.get(pk=pk)
+	#usersPlus = UserPlus.objects.get(user=user)
+	usersPlus = UserPlus.objects.filter(user=user)
+	return render_to_response('user_fotos.html',{'usersPlus': usersPlus, 'user': user})

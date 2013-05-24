@@ -9,7 +9,7 @@ class UserPlus(models.Model):
 	
 	#user = models.ForeignKey(User)
 	#userPlus = models.ForeignKey(User)
-	user = models.ForeignKey(User, unique=True)
+	user = models.ForeignKey(User)
 	foto = models.ImageField(upload_to="images/users")
 
 #class Usuario(Pessoa):

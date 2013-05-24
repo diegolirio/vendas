@@ -15,10 +15,14 @@ class Produto(models.Model):
 	valor = models.FloatField()
 	data_compra = models.DateField()
 	marca = models.ForeignKey(Marca)
-	foto = models.ImageField(upload_to='images/produtos')
 	
 	def __unicode__(self):
 		return str(self.codigo) + ": " + self.nome + " - " + self.marca.nome
+		
+class FotoProduto(models.Model):
+	produto = models.ForeignKey(Produto)
+	foto = models.ImageField(upload_to='images/produtos')		
+	principal = models.BooleanField()
 	
 
 class Fornecedor(models.Model):

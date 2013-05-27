@@ -1,0 +1,23 @@
+{% extends '_base_simple.html' %}
+
+{% block body %}		
+	
+	<div class="container">
+		
+		<br/><br/>		
+		
+		  <hr/>
+		  <h1>Fotos</h1>
+		
+		  <h3 id="myModalLabel">Cadastrar Nova Foto para "{{ produto.nome }}"</h3>
+
+		  <form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+					
+				{{ form.as_p }}							
+
+				<input type="submit" class="btn btn-success" value="Salvar"/>
+				<input type="submit" class="btn btn-primary" onclick="close__('N')" value="Cancelar"/>
+		 </form>	
+		
+	</div>
+{% endblock %}

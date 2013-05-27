@@ -34,10 +34,10 @@ def produto_new(request):
 		
 def produto_edit(request, pk):
 	p = Produto.objects.get(pk=pk)
-	#try:
-	foto_main = FotoProduto.objects.filter(produto=p, principal=True).get()
-	#except:
-	#	foto_principal = FotoProduto()
+	try:
+		foto_main = FotoProduto.objects.filter(produto=p, principal=True)[0:1].get()
+	except:
+		foto_main = None
 	if request.method == 'POST':
 		form = ProdutoForm(request.POST, request.FILES, instance=p)
 		if form.is_valid():
@@ -56,8 +56,9 @@ def produto_delete(request, pk):
 	return render_to_response('produto_delete.html', {'produto': p, 'delected': delected}, context_instance=RequestContext(request))
 		
 def produto_fotos(request, pk):
+	#ToDO...: este methodo.... . Foto Somente Visualizacao...		
 	p = Produto.objects.get(pk=pk)
-	fotos = FotoProduto.objects.filter(produto=p)
+	fotos = FotoProduto.objects.filter(produto=p).order_by('-principal')
 	form = FotoProdutoForm()
 	if request.method == 'POST':
 		form = FotoProdutoForm(request.POST, request.FILES)
@@ -70,6 +71,29 @@ def produto_fotos(request, pk):
 			form = FotoProdutoForm()
 			fotos = FotoProduto.objects.filter(produto=p)
 	return render_to_response('produto_fotos.html', {'produto': p, 'fotos': fotos, 'form': form}, context_instance=RequestContext(request))		
+	
+def produto_fotos_form(request):
+	delected = 'N'
+	# ToDo: Passar id produto por sessao...
+	p = Produto.objects.get(pk=request.GET['produto_id'])
+	if request.method == 'POST':
+		if request.GET['foto_produto_id'] == '0':
+			form = FotoProdutoForm(request.POST, request.FILES)
+		if form.is_valid():
+			delected = 'S'
+			if bool(form['principal'].value) == True:
+				fotos = FotoProduto.objects.filter(produto=p).order_by('-principal')
+				for f in fotos:
+					f.principal = False
+					f.save()			
+			form.save()
+	else:
+		if request.GET['foto_produto_id'] == '0':
+			form = FotoProdutoForm()
+		else:
+			foto = FotoProduto.objects.get(pk=pk)
+			form = FotoProdutoForm(instance=foto)
+	return render_to_response('produto_fotos_form.html', {'form': form, 'delected': delected, 'produto': p}, context_instance=RequestContext(request))	
 	
 def marcas(request):
 	marcas = Marca.objects.all()

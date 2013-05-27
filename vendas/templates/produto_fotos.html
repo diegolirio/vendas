@@ -6,56 +6,74 @@
 		
 		<br/><br/>
 		
-		<h3> Cadastrar Nova Foto para "{{ produto.nome }}"</h3>
+			<!--<h3> Cadastrar Nova Foto para "{{ produto.nome }}"</h3>-->
+			<a href="/produto_edit/{{produto.id}}" class="btn btn-large">Voltar</a>
+			<!--<a href="#new" role="button" data-toggle="modal" class="btn btn-success btn-large">Cadastrar Nova Foto para "{{ produto.nome }}"</a>-->
+		    <a href="/produto_fotos_form/?foto_produto_id=0&produto_id={{produto.id}}" class="btn btn-success btn-large" onclick="delete__(this.href); return false; ">Cadastrar Nova Foto para "{{ produto.nome }}"</a>
+			<!--
+			<div id="new" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel">Cadastrar Nova Foto para "{{ produto.nome }}"</h3>
+				  </div>
+				  
+				  <form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+					<div class="modal-body">						
+							{{ form.as_p }}							
+					</div>
+				  
+					<div class="modal-footer">
+						<input type="submit" class="btn" value="Salvar"/>
+						<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+					</div>
+				 </form>	
+			</div>	
+			-->		
 		
-		<form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
-			{{ form.as_p }}
-			
-			<input type="submit" class="btn" value="Salvar"/>
-			<a href="/produto_edit/{{produto.id}}">Cancelar</a>
-			
-		</form>
-		
-		<br/>
+		<hr/>
 		<h1>Fotos</h1>
 		
-		<a href="#myModal" role="button" class="btn btn-success" data-toggle="modal">Diego Modal</a>
+		{% for f in fotos %} 
 		
-		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			<h3 id="myModalLabel">Consultar Valor</h3>
-		  </div>
-		  <div class="modal-body">
-				{% for f in fotos %} 
-						<img src="{{f.foto.url}}"/>
+			<a href="#{{ f.id }}" role="button" data-toggle="modal"><img src="{{f.foto.url}}" height="200" width="250"/></a>
+			
+			<div id="{{ f.id }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel{{ f.id }}">Consultar Valor</h3>
+				  </div>
+				  <div class="modal-body">
+					
+							<img src="{{f.foto.url}}"/>
 
-						<form action="" method="POST"> {% csrf_token %}
-							<p>
-								<input type="checkbox" name="principal" id="id_principal" value="{{f.principal}}"/>
-								Principal
-							</p>			
-							<input type="submit" value="Salvar" name="save_update" class="btn btn-success"/>
-						</form>
-						
-						<div class="btn-group">
-						  <a class="btn dropdown-toggle btn-inverse" data-toggle="dropdown" href="#">
-							Opçoes
-							<span class="caret"></span>
-						  </a>
-						  <ul class="dropdown-menu">
-							<!-- dropdown menu links -->
-							<a href="#">Excluir</a>
-						  </ul>
-						</div>						
-						<hr/>
-				{% endfor %}
+							<br/><br/><br/>
 
-		  </div>
-		  <div class="modal-footer">
-			<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
-		  </div>
-		</div>
+							<form action="" method="POST" name="{{ f.id }}"> {% csrf_token %}
+									<input type="checkbox" name="principal" id="id_principal{{ f.id }}" {% if f.principal %} checked {% endif %} >
+									Principal
+									
+									<div class="btn-group pull-right">
+									  <a class="btn dropdown-toggle btn-inverse" data-toggle="dropdown" href="#">
+										Opçoes
+										<span class="caret"></span>
+									  </a>
+									  <ul class="dropdown-menu">
+										<!-- dropdown menu links -->
+										<a href="#">Excluir</a>
+									  </ul>
+									</div>										
+									
+									<input type="submit" value="Salvar" name="save_update" class="btn btn-success"/>
+								
+							</form>
+
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+					</div>
+			</div>
+		
+		{% endfor %}
 		
 	</div>
 {% endblock %}

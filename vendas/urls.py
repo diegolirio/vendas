@@ -43,6 +43,7 @@ urlpatterns = patterns('',
     url(r'^produto_edit/(?P<pk>\d+)/$', 'produto.views.produto_edit'),
     url(r'^produto_delete/(?P<pk>\d+)/$', 'produto.views.produto_delete'),
     url(r'^produto_fotos/(?P<pk>\d+)/$', 'produto.views.produto_fotos'),
+    url(r'^produto_fotos_form/$', 'produto.views.produto_fotos_form'),
     
     # ------ Nfs ------
     url(r'^nf_new/$', 'vendas_produtos.views.nf_new'),

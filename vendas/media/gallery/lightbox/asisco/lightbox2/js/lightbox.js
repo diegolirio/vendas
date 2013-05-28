@@ -50,8 +50,8 @@ lightbox = new Lightbox options
   LightboxOptions = (function() {
 
     function LightboxOptions() {
-      this.fileLoadingImage = 'gallery/lightbox/asisco/lightbox2/images/loading.gif';
-      this.fileCloseImage = 'gallery/lightbox/asisco/lightbox2/images/close.png';
+      this.fileLoadingImage = '/media/gallery/lightbox/asisco/lightbox2/images/loading.gif';
+      this.fileCloseImage = '/media/gallery/lightbox/asisco/lightbox2/images/close.png';
       this.resizeDuration = 700;
       this.fadeDuration = 500;
       this.labelImage = "Image";

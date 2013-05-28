@@ -21,7 +21,7 @@ class Produto(models.Model):
 		
 class FotoProduto(models.Model):
 	produto = models.ForeignKey(Produto)
-	foto = models.ImageField(upload_to='images/produtos')		
+	foto = models.ImageField(upload_to='images/produtos')#, height_field='420', width_field='562')		
 	principal = models.BooleanField()
 	
 

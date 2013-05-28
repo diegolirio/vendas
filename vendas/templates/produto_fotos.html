@@ -4,11 +4,11 @@
 
 
 
-	  <link rel="stylesheet" href="gallery/lightbox/asisco/lightbox2/css/lightbox.css" type="text/css" media="screen" />
-	  <link rel="stylesheet" href="gallery/lightbox/asisco/lightbox2/css/screen2.css" type="text/css" media="screen" />
+	  <link rel="stylesheet" href="/media/gallery/lightbox/asisco/lightbox2/css/lightbox.css" type="text/css" media="screen" />
+	  <link rel="stylesheet" href="/media/gallery/lightbox/asisco/lightbox2/css/screen2.css" type="text/css" media="screen" />
 		
-	  <script src="gallery/lightbox/asisco/lightbox2/js/jquery-1.7.2.min.js"></script>
-	  <script src="gallery/lightbox/asisco/lightbox2/js/lightbox.js"></script>
+	  <script src="/media/gallery/lightbox/asisco/lightbox2/js/jquery-1.7.2.min.js"></script>
+	  <script src="/media/gallery/lightbox/asisco/lightbox2/js/lightbox.js"></script>
 
 	<script>
 	  jQuery(document).ready(function($) {
@@ -41,95 +41,28 @@
 		
 		<br/><br/>
 		
-			<!--<h3> Cadastrar Nova Foto para "{{ produto.nome }}"</h3>-->
-			<a href="/produto_edit/{{produto.id}}" class="btn btn-large">Voltar</a>
-			<!--<a href="#new" role="button" data-toggle="modal" class="btn btn-success btn-large">Cadastrar Nova Foto para "{{ produto.nome }}"</a>-->
-		    <a href="/produto_fotos_form/?foto_produto_id=0&produto_id={{produto.id}}" class="btn btn-success btn-large" onclick="delete__(this.href); return false; ">Cadastrar Nova Foto para "{{ produto.nome }}"</a>
-			<!--
-			<div id="new" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				  <div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h3 id="myModalLabel">Cadastrar Nova Foto para "{{ produto.nome }}"</h3>
-				  </div>
-				  
-				  <form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
-					<div class="modal-body">						
-							{{ form.as_p }}							
-					</div>
-				  
-					<div class="modal-footer">
-						<input type="submit" class="btn" value="Salvar"/>
-						<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-					</div>
-				 </form>	
-			</div>	
-			-->		
+		<!--<h3> Cadastrar Nova Foto para "{{ produto.nome }}"</h3>-->
+		<a href="/produto_edit/{{produto.id}}" class="btn btn-large">Voltar</a>
+		<!--<a href="#new" role="button" data-toggle="modal" class="btn btn-success btn-large">Cadastrar Nova Foto para "{{ produto.nome }}"</a>-->
+		<a href="/produto_fotos_form/?foto_produto_id=0&produto_id={{produto.id}}" class="btn btn-success btn-large" onclick="delete__(this.href); return false; ">Cadastrar Nova Foto para "{{ produto.nome }}"</a>
 		
 		<hr/>
 		<h1>Fotos</h1>
-		
-		{% for f in fotos %} 		
 					
-			  <div class="imageRow">
-				<div class="set">
-				  <div class="single first">
-					  <a href="gallery/lightbox/asisco/lightbox2/images/examples/image-3.jpg" rel="lightbox[plants]" title='Click on the right side of the image to move forward. <a href="http://asisco.com.br" onclick="alert(this.href);">link</a>'><img src="gallery/lightbox/asisco/lightbox2/images/examples/thumb-3.jpg" alt="Plants: image 1 de 4 thumb" /></a> 
-					</div>
+		  <div class="imageRow">
+			<div class="set">
+			  {% for f in fotos %}
 				  <div class="single">
-					  <a href="gallery/lightbox/asisco/lightbox2/images/examples/image-4.jpg" rel="lightbox[plants]" title="Alternately you can press the right arrow key." ><img src="gallery/lightbox/asisco/lightbox2/images/examples/thumb-4.jpg" alt="Plants: image 2 de 4 thumb" /></a>
+					  <!--
+					  <a href="/media/gallery/lightbox/asisco/lightbox2/images/examples/image-3.jpg" rel="lightbox[plants]" title='Click on the right side of the image to move forward. <a href="http://asisco.com.br" onclick="alert(this.href);">link</a>'>
+					  <img src="/media/gallery/lightbox/asisco/lightbox2/images/examples/thumb-3.jpg" alt="Plants: image 1 de 4 thumb" /></a> 
+					  -->
+					  <a href="{{f.foto.url}}" rel="lightbox[plants]" title='<a href="/produto_fotos_form/?foto_produto_id={{f.id}}&produto_id={{produto.id}}" onclick="delete__(this.href);">Editar Foto</a> | <a href="/produto_foto_delete/?foto_produto_id={{f.id}}&produto_id={{produto.id}}" onclick="delete__(this.href);">Excluir</a>'>
+					  <img src="{{f.foto.url}}" height="200" width="250" alt="Plants: image 1 de 4 thumb"/></a> 					  
 				  </div>
-				  <div class="single">
-					  <a href="gallery/lightbox/asisco/lightbox2/images/examples/image-5.jpg" rel="lightbox[plants]" title="The script preloads the next image in the set as you're viewing."><img src="gallery/lightbox/asisco/lightbox2/images/examples/thumb-5.jpg" alt="Plants: image 3 de 4 thumb" /></a>
-				  </div> 
-				  <div class="single last">
-					  <a href="gallery/lightbox/asisco/lightbox2/images/examples/image-6.jpg" rel="lightbox[plants]" title="Click the X or anywhere outside the image to close"><img src="gallery/lightbox/asisco/lightbox2/images/examples/thumb-6.jpg" alt="Plants: image 4 de 4 thumb" /></a>
-				  </div>
-				</div>
-			  </div>		
-		
-		
-		<!--
-			<a href="#{{ f.id }}" role="button" data-toggle="modal"><img src="{{f.foto.url}}" height="200" width="250"/></a>
-			
-			<div id="{{ f.id }}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				  <div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h3 id="myModalLabel{{ f.id }}">Consultar Valor</h3>
-				  </div>
-				  <div class="modal-body">
-					
-							<img src="{{f.foto.url}}"/>
-
-							<br/><br/><br/>
-
-							<form action="" method="POST" name="{{ f.id }}"> {% csrf_token %}
-									<input type="checkbox" name="principal" id="id_principal{{ f.id }}" {% if f.principal %} checked {% endif %} >
-									Principal
-									
-									<div class="btn-group pull-right">
-									  <a class="btn dropdown-toggle btn-inverse" data-toggle="dropdown" href="#">
-										Opçoes
-										<span class="caret"></span>
-									  </a>
-									  <ul class="dropdown-menu">
-										<a href="#">Excluir</a>
-									  </ul>
-									</div>										
-									
-									<input type="submit" value="Salvar" name="save_update" class="btn btn-success"/>
-								
-							</form>
-
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
-					</div>
+			   {% endfor %} 
 			</div>
-			-->
-			
-			
-		
-		{% endfor %}
+		  </div>		
 		
 	</div>
 {% endblock %}

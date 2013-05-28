@@ -1,0 +1,19 @@
+{% extends '_base_simple.html' %}
+
+{% block body %}
+
+	<br/><br/>
+	<h2>Deseja Excluir Imagem ?</h2>
+	
+	<form action="" method="POST"> {% csrf_token %}
+		<p><img src="{{foto.foto.url}}"/></p>	
+		
+		<p>
+			<input type="submit" value="Sim" class="btn btn-success">
+			<a href="#" class="btn btn-primary" onclick="close__('N');">Não</a>
+		</p>
+		
+	</form>
+	
+
+{% endblock %}

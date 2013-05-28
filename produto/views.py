@@ -12,10 +12,6 @@ from produto.forms import FornecedorForm
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 
-INSERT = 'insert'
-UPDATE = 'update'
-
-
 def produtos(request):	
 	ps = Produto.objects.all()	
 	return render_to_response('produtos.html', {'produtos': ps})
@@ -79,6 +75,9 @@ def produto_fotos_form(request):
 	if request.method == 'POST':
 		if request.GET['foto_produto_id'] == '0':
 			form = FotoProdutoForm(request.POST, request.FILES)
+		else:
+			foto = FotoProduto.objects.get(pk=request.GET['foto_produto_id'])
+			form = FotoProdutoForm(request.POST, request.FILES, instance=foto)
 		if form.is_valid():
 			delected = 'S'
 			if bool(form['principal'].value) == True:
@@ -91,9 +90,18 @@ def produto_fotos_form(request):
 		if request.GET['foto_produto_id'] == '0':
 			form = FotoProdutoForm()
 		else:
-			foto = FotoProduto.objects.get(pk=pk)
+			foto = FotoProduto.objects.get(pk=request.GET['foto_produto_id'])
 			form = FotoProdutoForm(instance=foto)
 	return render_to_response('produto_fotos_form.html', {'form': form, 'delected': delected, 'produto': p}, context_instance=RequestContext(request))	
+	
+def produto_foto_delete(request):
+	foto = FotoProduto.objects.get(pk=request.GET['foto_produto_id'])
+	produto = Produto.objects.get(pk=request.GET['produto_id'])
+	delected = 'N'
+	if request.method == 'POST':
+		foto.delete()
+		delected = 'S'
+	return render_to_response('produto_foto_delete.html', {'foto': foto, 'produto': produto, 'delected': delected}, context_instance=RequestContext(request))
 	
 def marcas(request):
 	marcas = Marca.objects.all()

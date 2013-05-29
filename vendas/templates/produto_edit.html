@@ -57,29 +57,37 @@
 							</div>
 
 							<div class="control-group">
-								<label for="zip" class="control-label">	
-									Zip Code
-								</label>
-								<div class="controls"><input name="zip" type="text" value="" id="zip">
-								</div>
+								<label class="control-label">{{ form.valor.label }}</label>										
+								<div class="controls">
+									<input name="{{form.valor.name}}" type="text" value="{{ form.valor.value }}">
+									{% if form.valor.errors %}
+										{% for error in form.valor.errors %}
+											<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>
+										{% endfor %}
+									{% endif %} 									
+								</div>	
 							</div>
 
 							<div class="control-group">
-								<label for="city" class="control-label">	
-									City
-								</label>
-								<div class="controls"><input name="city" type="text" value="" id="city">
-								</div>
+								<label class="control-label">{{ form.data_compra.label }}</label>										
+								<div class="controls">
+									<input name="{{form.data_compra.name}}" type="text" value="{{ form.data_compra.value }}">
+									{% if form.data_compra.errors %}
+										{% for error in form.data_compra.errors %}
+											<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>
+										{% endfor %}
+									{% endif %} 									
+								</div>	
 							</div>
 							
 							<div class="control-group">
-								<label for="country" class="control-label">	
-									Country
+								<label class="control-label">	
+									{{ form.marca.label }}
 								</label>
 								<div class="controls">
+									{{ form.marcas }}
 									<select name="country" id="country">
-										<option value=""></option>
-										<option value="AR">Argentina</option>		
+										<option value=""></option>	
 									</select>
 								</div>
 							</div>

@@ -22,22 +22,140 @@
 
 
 	<div class="container">
-		<br/><br/><br/>
 		
-		<h1>Cadastro de Produto (Alteração)</h1>
+		
+		<h1 class="text-error">Cadastro de Produto (Alteração)</h1>
 		<br/>
+		
+				<div class="row well">
+					<div class="span8">
+						<form action="" method="POST" enctype="multipart/form-data" class="form-horizontal"> {% csrf_token %}
+							<div class="control-group">
+								<label class="control-label">{{ form.codigo.label }}</label>										
+								<div class="controls">
+									<input name="{{form.codigo.name}}" type="text" value="{{ form.codigo.value }}">
+									<!--<input name="email" type="email" value="" id="email">-->
+									{% if form.codigo.errors %}
+										{% for error in form.codigo.errors %}
+											<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>
+										{% endfor %}
+									{% endif %} 									
+								</div>	
+							</div>
+
+							<div class="control-group">
+								<label class="control-label">{{ form.nome.label }}</label>										
+								<div class="controls">
+									<input name="{{form.nome.name}}" type="text" value="{{ form.nome.value }}">
+									<!--<input name="email" type="email" value="" id="email">-->
+									{% if form.nome.errors %}
+										{% for error in form.nome.errors %}
+											<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>
+										{% endfor %}
+									{% endif %} 									
+								</div>	
+							</div>
+
+							<div class="control-group">
+								<label for="zip" class="control-label">	
+									Zip Code
+								</label>
+								<div class="controls"><input name="zip" type="text" value="" id="zip">
+								</div>
+							</div>
+
+							<div class="control-group">
+								<label for="city" class="control-label">	
+									City
+								</label>
+								<div class="controls"><input name="city" type="text" value="" id="city">
+								</div>
+							</div>
+							
+							<div class="control-group">
+								<label for="country" class="control-label">	
+									Country
+								</label>
+								<div class="controls">
+									<select name="country" id="country">
+										<option value=""></option>
+										<option value="AR">Argentina</option>		
+									</select>
+								</div>
+							</div>
+
+							<div class="form-actions">
+								<button type="submit" class="btn btn-large btn-primary">Save Billing Address</button>
+							</div>
+						</form>
+					</div> <!-- .span8 -->
+				</div>
 		
 		<form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
 		
-			{{ form.as_p }}
+			<!--{ form.as_p }}-->			
 			
-			<!--<img src="/media/{{form.foto.value}}"/>-->
+			{{ form.codigo.label }}<br/>
+			{% if form.codigo.errors %}
+				{% for error in form.codigo.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Código: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 			
+			{{ form.codigo }}
 			
+			<br/>
+			
+			{{ form.nome.label }}<br/>
+			{% if form.nome.errors %}
+				{% for error in form.nome.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Nome: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 				
+			{{ form.nome }}
+			<br/>
+			{{ form.valor.label }}<br/>
+			{% if form.valor.errors %}
+				{% for error in form.valor.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Valor: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 			
+			{{ form.valor }}
+			<br/>
+			{{ form.data_compra.label }}<br/>
+			{% if form.data_compra.errors %}
+				{% for error in form.data_compra.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Data da Compra: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 			
+			{{ form.data_compra }}
+			<br/>
+			{{ form.marca.label }}<br/>
+			{% if form.marca.errors %}
+				{% for error in form.marca.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Marca: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 			
+			{{ form.marca }}		
 			<br/>			
 			
 			<input type="submit" value="Salvar alteração" class="btn btn-success" name="save"/>
 			<a href="/produtos/" class="btn">Cancelar</a>
-		
+			
 		</form>
 		
 		

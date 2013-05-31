@@ -1,0 +1,105 @@
+{% extends '_base.html' %}
+
+{% block body %}
+
+	<div class="container">
+		
+		<script type="text/javascript">
+		
+			function new_tel_(url) {
+				var w = window.open(url, '', 'height=500, width=700, top=100, left=250, scrollbars=no, resizable=no');
+				//alert(url);
+			}
+		
+		</script>
+		
+		
+		<h1>Cadastro de Fornecedor</h1>
+		
+		<br/>
+
+		<!--
+		<form method="POST" action=""> {% csrf_token %}
+			CNPJ/CPF<br/>
+			<input type="text" value="{{model.cnpj_cpf}}"/><br/>
+			Nome<br/>
+			<input type="text" value="{{model.nome}}"/><br/>
+			
+			<input type="submit" value="Salvar" class="btn"/>
+			
+		</form>
+		-->
+		
+		<hr/> 
+		
+		<form method="POST" action=""> {% csrf_token %}
+		
+			<input type="hidden" value="{{f.id}}" name="id"/>
+		
+			<!-- {{ form.as_p }} -->
+			{% if form.cnpj_cpf.errors %}
+				{% for error in form.cnpj_cpf.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>CNPJ: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 		
+			<p>
+				<label for="id_cnpj_cpf">Cnpj cpf:</label> 
+				<input id="id_cnpj_cpf" type="text" name="cnpj_cpf" maxlength="20" value="{{f.cnpj_cpf}}"/>
+			</p>
+			{% if form.nome.errors %}
+				{% for error in form.nome.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>{{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 				
+			<p>
+				<label for="id_nome">Nome:</label>  
+				<input id="id_nome" type="text" name="nome" maxlength="50" value="{{f.nome}}"/>
+			</p>
+			{% if form.telefone.errors %}
+				{% for error in form.telefone.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>{{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 			
+			<p>
+				<label for="id_telefone">Telefone:</label> 
+				<select name="telefone" id="id_telefone">				
+					<option value="">---------</option>
+					{% for t in telefones %}
+						<option value="{{ t.id }}" {% if t.id == f.telefone.id %} selected="selected" {% endif %} >({{t.ddd}}) {{t.numero}}</option>
+					{% endfor %}				
+				</select>
+				<a href="/tel_form/" onclick="new_tel_(this.href); return false;"><i class="icon-plus"></i></a>
+			</p>
+			{% if form.ie.errors %}
+				{% for error in form.ie.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>{{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 			
+			<p>
+				<label for="id_ie">IE:</label>
+				<input type="text" name="ie" value="{{f.ie}}" id="id_ie"/>
+			</p>
+			
+			<a href="/fornecedores/" class="btn">Cancelar</a>
+			<input type="submit" value="Salvar" class="btn btn-primary"/>	 		
+			
+			
+		</form>
+		
+		
+		
+	</div>
+
+{% endblock %}

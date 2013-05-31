@@ -1,0 +1,22 @@
+{% extends '_base.html' %}
+
+{% block body %}
+	
+	<div class="container">
+		<br/><br/><br/>
+		
+		<h1>Venda de Produtos</h1>
+		<br/>
+		<form method="POST" action=""> {% csrf_token %}
+			
+			{{ form.as_p }}
+			 
+			<br/>
+			
+			<input type="submit" value="Salvar" class="btn btn-success" name="save"/>
+			<a href="/vendas_produtos/" class="btn">Cancelar</a>
+			
+		</form>
+		
+	</div>
+{% endblock %}

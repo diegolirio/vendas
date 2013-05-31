@@ -1,0 +1,81 @@
+{% extends '_base.html' %}
+
+{% block body %}
+
+	<div class="container">
+		
+		{% include template %}
+		
+		<!--
+		<form action="" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+		
+			<!--{ form.as_p }}--
+			
+			
+			
+			{{ form.codigo.label }}<br/>
+			{% if form.codigo.errors %}
+				{% for error in form.codigo.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Código: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 			
+			{{ form.codigo }}
+			
+			<br/>
+			
+			{{ form.nome.label }}<br/>
+			{% if form.nome.errors %}
+				{% for error in form.nome.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Nome: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 				
+			{{ form.nome }}
+			<br/>
+			{{ form.valor.label }}<br/>
+			{% if form.valor.errors %}
+				{% for error in form.valor.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Valor: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 			
+			{{ form.valor }}
+			<br/>
+			{{ form.data_compra.label }}<br/>
+			{% if form.data_compra.errors %}
+				{% for error in form.data_compra.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Data da Compra: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 			
+			{{ form.data_compra }}
+			<br/>
+			{{ form.marca.label }}<br/>
+			{% if form.marca.errors %}
+				{% for error in form.marca.errors %}
+					<div id="group-error" class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<strong>Marca: {{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %} 			
+			
+			<br/>			
+			
+			<input type="submit" value="Salvar alteração" class="btn btn-success" name="save"/>
+			<a href="/produtos/" class="btn">Cancelar</a>
+			
+		</form>
+		-->
+		
+	</div>
+{% endblock %}

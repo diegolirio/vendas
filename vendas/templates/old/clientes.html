@@ -1,0 +1,52 @@
+{% extends '_base.html' %}
+
+{% block body %}
+	
+	<div class="container">
+		<h1 class="text-center">Clientes</h1>
+		<br/>
+		<table class="table table-striped table-hover">
+			<tr>
+				<td>CNPJ/CPF</td>
+				<td>Nome</td>
+				<td>Telefone</td>
+				<!--
+				<td class="text-center"><i class="icon-edit"/></td>
+				<td class="text-center"><i class="icon-trash"/></td>
+				-->
+				<td> </td>
+			</tr>
+			{% for c in clientes %}
+			<tr>
+				<td>{{ c.cnpj_cpf }}</td>
+				<td>{{ c.nome }}</td>
+				<td>({{ c.telefone.ddd }}) {{ c.telefone.numero }}</td>
+				<!--
+				<td><a href="/cliente_edit/{{ c.id }}/">Editar</a></td>
+				<td><a href="/cliente_delete/{{ c.id }}/">Excluir</a></td>
+				-->
+				<td>
+					<div class="btn-group">
+					  <a class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#">
+						Ação
+						<span class="caret"></span>
+					  </a>
+					  <ul class="dropdown-menu">
+							<li><a href="/cliente_edit/{{ c.id }}/"><i class="icon-edit"></i>  Alterar</a></li>
+							<li><a href="/cliente_delete/{{ c.id }}/"><i class="icon-trash"></i>  Excluir</a></li>
+					  </ul>
+					</div>		
+				</td>						
+			</tr>
+			{% empty %}
+				<h3> Não há Clientes cadastrados</h3>
+			{% endfor %}
+		</table>
+		
+		<div class="text-center">
+			<td><a href="/cliente_new/" class="btn btn-primary">Novo</a></td>
+		</div>
+		
+	</div>
+
+{% endblock %}

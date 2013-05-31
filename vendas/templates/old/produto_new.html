@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+
+{% block body %}
+	
+	<div class="container">
+		<br/><br/><br/>
+		
+		<h1>Cadastro de Produtos</h1>
+		<br/>
+		<form method="POST" action="" enctype="multipart/form-data"> {% csrf_token %}
+			
+			{{ form.as_p }}
+			
+			<br/>
+			
+			<input type="submit" value="Salvar" class="btn btn-success" name="save"/>
+			<input type="submit" value="Salvar e Editar/Adicionar Foto" class="btn btn-success" name="add_foto"/>
+			<a href="/produtos/" class="btn">Cancelar</a>
+			
+		</form>
+		
+	</div>
+{% endblock %}

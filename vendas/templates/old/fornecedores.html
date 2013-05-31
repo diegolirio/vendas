@@ -1,0 +1,43 @@
+{% extends '_base.html' %}
+
+{% block body %}
+
+	<div class="container">	
+		<h1>Fornecedores</h1>
+		
+		<a href="/fornecedor_form/0/" class="btn btn-primary pull-right">Novo</a>
+		<br/><br/>
+		
+		<table class="table table-hover">
+			<tr>
+				<td>ID</td>
+				<td>CNPJ/CPF</td>
+				<td>Nome</td>
+				<td>Telefone</td>
+				<td>IE</td>
+				<td>Ação</td>
+			</tr>         
+			{% for f in fornecedores %}
+				<tr>
+					<td>{{ f.id }}</td>
+					<td>{{ f.cnpj_cpf }}</td>
+					<td>{{ f.nome }}</td>
+					<td>{{ f.telefone.numero }}</td>
+					<td>{{ f.ie }}</td>
+					<td>
+						<div class="btn-group">
+						  <a class="btn dropdown-toggle btn-small" data-toggle="dropdown" href="#">
+							<i class="icon-cog"></i>
+							<span class="caret"></span>
+						  </a> 
+						  <ul class="dropdown-menu">
+								<li><a href="/fornecedor_form/{{ f.id }}/"><i class="icon-edit"></i>  Alterar</a></li>
+								<li><a href="/fornecedor_delete/{{ f.id }}/" onclick="delete__(this.href); return false;"><i class="icon-trash"></i>  Excluir</a></li>
+						  </ul>
+						</div>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}

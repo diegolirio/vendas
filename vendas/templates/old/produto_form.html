@@ -1,0 +1,117 @@
+	<!-- Asisco LightBox CSS -->
+	<link rel="stylesheet" type="text/css" href="/media/gallery/lightbox/asisco/lightbox_display/css/prettyPhoto.css" />
+	<!-- jQuery Library (skip this step if already called on page ) -->
+	<script type="text/javascript" src="/media/gallery/lightbox/asisco/lightbox_display/js/jquery.min.js"></script> <!-- (do not call twice) -->
+	<!-- v LightBox JS -->
+	<script type="text/javascript" src="/media/gallery/lightbox/asisco/lightbox_display/js/jquery.prettyPhoto.js"></script>
+	<!-- Asisco LightBox Settings -->
+	<script type="text/javascript">
+	$(function(){
+		$("a[rel^='prettyPhoto']").prettyPhoto({
+			social_tools: false,
+		});
+	});
+	</script>
+
+
+	<h2 class="text-error">Cadastro de Produto {% if produto.id > 0 %} (Alteração) {% endif %}</h2>
+	<br/>
+
+	<div class="row well">
+		<div class="span7">
+			<form action="" method="POST" enctype="multipart/form-data" class="form-horizontal"> {% csrf_token %}
+				<div class="control-group">
+					<label class="control-label">{{ form.codigo.label }}</label>										
+					<div class="controls">
+						<!--<input name="{{form.codigo.name}}" type="text" value="{{ produto.codigo }}">-->
+						{{ form.codigo }}
+						{% if form.codigo.errors %}
+							{% for error in form.codigo.errors %}
+								<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>
+							{% endfor %}
+						{% endif %} 									
+					</div>	
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">{{ form.nome.label }}</label>
+					<div class="controls">
+						<!--<input name="{{form.nome.name}}" type="text" value="{{ produto.nome }}">-->
+						{{ form.nome }}
+						{% if form.nome.errors %}
+							{% for error in form.nome.errors %}
+								<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>
+							{% endfor %}
+						{% endif %} 									
+					</div>	
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">{{ form.valor.label }}</label>										
+					<div class="controls">
+						<!--<input name="{{form.valor.name}}" type="text" value="{{ produto.valor }}">-->
+						{{ form.valor }}
+						{% if form.valor.errors %}
+							{% for error in form.valor.errors %}
+								<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>
+							{% endfor %}
+						{% endif %} 									
+					</div>	
+				</div>
+
+				<div class="control-group">
+					<label class="control-label">{{ form.data_compra.label }}</label>										
+					<div class="controls">
+						<!--<input name="{{form.data_compra.name}}" type="text" value="{{ produto.data_compra }}">-->
+						{{ form.data_compra }}
+						{% if form.data_compra.errors %}
+							{% for error in form.data_compra.errors %}
+								<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>
+							{% endfor %}
+						{% endif %} 									
+					</div>	
+				</div>
+				
+				<div class="control-group">
+					<label class="control-label">	
+						{{ form.marca.label }}
+					</label>
+					<div class="controls">
+						{{ form.marca }} <a href="#" onclick="alert('add marca');"><i class="icon-plus"></i></a>
+						{% if form.marca.errors %}
+							{% for error in form.marca.errors %}
+								<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>
+							{% endfor %}
+						{% endif %} 										
+						<!--
+						<select name="country" id="country">
+							<option value=""></option>	
+						</select>
+						-->
+					</div>
+				</div>
+
+				<div class="form-actions">
+					<!--<button type="submit" class="btn btn-large btn-primary">Save Billing Address</button>-->
+					<input type="submit" value="Salvar alteração" class="btn btn-large btn-success" name="save"/>
+					<a href="/produtos/" class="btn btn-large">Cancelar</a>								
+				</div>
+				
+			</form>
+		</div> <!-- .span8 -->
+		<div class="span4">
+			{% if produto.id > 0 %}
+				<a href="/produto_fotos/{{ produto.id }}">
+					Fotos (Adicionar/Alterar)<br/><br/>
+				</a>
+			
+				<!-- Asisco LightBox:Inline Start -->
+					<a href="#inline-2" rel="prettyPhoto[inline]"><img src="{{foto_main.foto.url}}" height="300" width="350"/></a>
+					<div id="inline-2" style="display:none;">
+						<img src="{{foto_main.foto.url}}"/>
+					</div>
+				<!-- Asisco LightBox:Inline End -->								
+			{% endif %}
+		</div>
+			
+	</div>

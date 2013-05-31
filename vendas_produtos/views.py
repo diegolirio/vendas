@@ -14,7 +14,7 @@ from vendas_produtos.forms import ItemsForm
 from django.template import RequestContext
 
 def home(request):
-	return render_to_response('index.html')
+	return render_to_response('_base.html', {'template': 'index.html'})
 
 def vendas(request):	
 	nfs = NotaFiscal.objects.all()	

@@ -71,85 +71,111 @@ from usuario.forms import UserForm
 
 def users(request):
 	users = User.objects.all()
-	return render_to_response('users.html', {'users': users}, context_instance=RequestContext(request))	
+	return render_to_response('_base.html', {'users': users, 'template': 'users.html'}, context_instance=RequestContext(request))	
 	
-def user_new(request):
-	#user = User()
-	if request.method == 'POST':
-		form = UserForm(request.POST, request.FILES)
-		if form.is_valid():
-			form.save()
-			return redirect('users')
-	else:
-		form = UserForm()
-	return render_to_response('user_new.html', {'form': form}, context_instance=RequestContext(request))	
-
-def user_edit(request, pk):
-	user = User.objects.get(pk=pk)
+def user_form(request, pk):
+	u = User()		
 	userPlus = UserPlus()
-	try:
-		userPlus = UserPlus.objects.get(user=user)
-	except:
-		userPlus = UserPlus()
-	if request.method == 'POST':
-		form = UserForm(request.POST, request.FILES, instance=user)
-		if form.is_valid():
-			form.save()
-			return redirect('users')
-	else:
-		form = UserForm(instance=user)
-	return render_to_response('user_edit.html', {'form': form, 'user': user, 'userPlus': userPlus}, context_instance=RequestContext(request))
-
-def user_delete(request, pk):
-	u = User.objects.get(pk=pk)
-	delected = 'N'
-	if request.method == 'POST': 
-		u.delete()
-		delected = 'S'
-	return render_to_response('user_delete.html', {'user': u, 'delected': delected}, context_instance=RequestContext(request))
-
-def userPlus_edit(request, pk):
-	#userPlus = UserPlus.objects.get(pk=pk)
-	user = User.objects.get(pk=pk)
-	try:
-		userPlus = UserPlus.objects.get(user=user)
-	except:
-		userPlus = UserPlus()
-	#print("Foto >>>>>" + userPlus.foto.url)
-	if request.method == 'POST':
-		#if userPlus.foto == 
+	form = UserForm()
+	if pk != '0':
+		u = User.objects.get(pk=pk)
+		form = UserForm(instance=u)
 		try:
-			if userPlus.pk > 0:
-				form = UserPlusForm(request.POST, request.FILES, instance=userPlus)
-			else:
-				form = UserPlusForm(request.POST, request.FILES)
+			userPlus = UserPlus.objects.get(user=user)
 		except:
-			form = UserPlusForm(request.POST, request.FILES)				
-		if form.is_valid():
-			form.save() 
-			return redirect('user_edit', pk=user.pk)
-	else:
-		if userPlus.pk > 0:
-			form = UserPlusForm(instance=userPlus)
+			userPlus = UserPlus()		
+	if request.method == 'POST':
+		if pk != '0':
+			form = UserForm(request.POST, request.FILES, instance=u)
 		else:
-			form = UserPlusForm()
-	return render_to_response('user_edit.html', {'form': form, 'foto': 'S', 'userPlus': userPlus}, context_instance=RequestContext(request))
-
-def userPlus_delete(request, pk):
-	u = UserPlus.objects.get(pk=pk)
-	user = u.user
-	#delected = 'N'
-	#if request.method == 'POST': 
-	u.delete()
+			form = UserForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return redirect('users')	
+	return render_to_response('_base.html', 
+	                          {  'form': form, 
+	                             'user': u, 
+	                             'template': 
+	                             'user_form.html', 
+	                             'userPlus': userPlus }, 
+	                          context_instance=RequestContext(request))
 	
-	form = UserPlusForm()
-	userPlus = UserPlus()
-	#	delected = 'S'
-	#return render_to_response('user_delete.html', {'user': u, 'foto': 'S', 'delected': delected}, context_instance=RequestContext(request))	
-	return render_to_response('user_edit.html', {'form': form, 'foto': 'S', 'userPlus': userPlus}, context_instance=RequestContext(request))
+#def user_new(request):
+#	#user = User()
+#	if request.method == 'POST':
+#		form = UserForm(request.POST, request.FILES)
+#		if form.is_valid():
+#			form.save()
+#			return redirect('users')
+#	else:
+#		form = UserForm()
+#	return render_to_response('user_new.html', {'form': form}, context_instance=RequestContext(request))	
+
+#def user_edit(request, pk):
+#	user = User.objects.get(pk=pk)
+#	userPlus = UserPlus()
+#	try:
+#		userPlus = UserPlus.objects.get(user=user)
+#	except:
+#		userPlus = UserPlus()
+#	if request.method == 'POST':
+#		form = UserForm(request.POST, request.FILES, instance=user)
+#		if form.is_valid():
+#			form.save()
+#			return redirect('users')
+#	else:
+#		form = UserForm(instance=user)
+#	return render_to_response('user_edit.html', {'form': form, 'user': user, 'userPlus': userPlus}, context_instance=RequestContext(request))
+
+#def user_delete(request, pk):
+#	u = User.objects.get(pk=pk)
+#	delected = 'N'
+#	if request.method == 'POST': 
+#		u.delete()
+#		delected = 'S'
+#	return render_to_response('user_delete.html', {'user': u, 'delected': delected}, context_instance=RequestContext(request))
+
+#def userPlus_edit(request, pk):
+#	#userPlus = UserPlus.objects.get(pk=pk)
+#	user = User.objects.get(pk=pk)
+#	try:
+#		userPlus = UserPlus.objects.get(user=user)
+#	except:
+#		userPlus = UserPlus()
+#	#print("Foto >>>>>" + userPlus.foto.url)
+##		#if userPlus.foto == 
+	#	try:
+	#		if userPlus.pk > 0:
+	#			form = UserPlusForm(request.POST, request.FILES, instance=userPlus)
+	#		else:
+	#			form = UserPlusForm(request.POST, request.FILES)
+	#	except:
+	#		form = UserPlusForm(request.POST, request.FILES)				
+	#	if form.is_valid():
+	#		form.save() 
+	#		return redirect('user_edit', pk=user.pk)
+	#else:
+	#	if userPlus.pk > 0:
+	#		form = UserPlusForm(instance=userPlus)
+	#	else:
+	#		form = UserPlusForm()
+	#return render_to_response('user_edit.html', {'form': form, 'foto': 'S', 'userPlus': userPlus}, context_instance=RequestContext(request))
+
+#def userPlus_delete(request, pk):
+#	u = UserPlus.objects.get(pk=pk)
+#	user = u.user
+#	#delected = 'N'
+#	#if request.method == 'POST': 
+#	u.delete()
+#	
+#	form = UserPlusForm()
+#	userPlus = UserPlus()
+#	#	delected = 'S'
+#	#return render_to_response('user_delete.html', {'user': u, 'foto': 'S', 'delected': delected}, context_instance=RequestContext(request))	
+#	return render_to_response('user_edit.html', {'form': form, 'foto': 'S', 'userPlus': userPlus}, context_instance=RequestContext(request))
 		
-def user_fotos(request, pk):
-	user = User.objects.get(pk=pk)
-	#usersPlus = UserPlus.objects.get(user=user)
-	usersPlus = UserPlus.objects.filter(user=user)
-	return render_to_response('user_fotos.html',{'usersPlus': usersPlus, 'user': user})
+#def user_fotos(request, pk):
+#	user = User.objects.get(pk=pk)
+#	#usersPlus = UserPlus.objects.get(user=user)
+#	usersPlus = UserPlus.objects.filter(user=user)
+#	return render_to_response('user_fotos.html',{'usersPlus': usersPlus, 'user': user})

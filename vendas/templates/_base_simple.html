@@ -15,40 +15,40 @@
 		<script src="/media/bootstrap/bootswatch.js"></script>
 		<script src="/media/bootstrap/jquery.smooth-scroll.min.js"></script>
 		
-		<script type="text/javascript">				
-			function show__(url, alt, larg) {
-				w = window.open(url, 
-								'', 
-								'height=550, width=750, top=150, left=250, scrollbars=no, resizable=no');
-								
+		<script type="text/javascript">		
+			
+			{% if execute_transation == 'S' %}
+				alert('Ação executada com sucesso');
+				close__('S');
+			{% endif %}
+			
+			function close__(execute_transation) {	
+				if (execute_transation == 'S') {			
+					window.opener.location.reload();
+					//window.opener.location.replace(window.opener.location); 
+				}				
+				window.close();				                
 			}
-		</script>			
+		</script>		
 		
 	{% endblock %}
 </head>
 <body>
 	
-	{% include 'menu_top.html' %}
+	
 	
 	{% block body %}
 		<!-- Conteudo -->
-		<div class="container">
-			{% include template %}
-		</div>
+		{% include template %}
 	{% endblock %}	
 	
-	<br/><br/><br/>
+	<br/><br/>
 	
 	<div class="text-center">
 		<span class="label label-important">asisco.com.br</span>
 	</div>
+	<br/>
 
-	<footer>
-		<div class="container">
-			<p>Base Bootstrap Twiiter</p>
-			<p>Bootstrap asisco @ 2013</p>
-		</div>
-	</footer>
 	
 </body>
 </html>

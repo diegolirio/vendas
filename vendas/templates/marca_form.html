@@ -1,0 +1,32 @@
+
+	<h2 class="text-error">Cadastro de Marca {% if marca.id > 0 %} (Alteração) {% endif %}</h2>
+	<br/>
+
+	<div class="row well">
+		<div class="span8">
+			<form action="" method="POST" enctype="multipart/form-data" class="form-horizontal"> {% csrf_token %}
+
+				<div class="control-group">
+					<label class="control-label">{{ form.nome.label }}</label>
+					<div class="controls">
+						<!--<input name="{{form.nome.name}}" type="text" value="{{ marca.nome }}">-->
+						{{ form.nome }}
+						{% if form.nome.errors %}
+							{% for error in form.nome.errors %}
+								<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>
+							{% endfor %}
+						{% endif %} 									
+					</div>	
+				</div>
+
+				<div class="form-actions">
+					<!--<button type="submit" class="btn btn-large btn-primary">Save Billing Address</button>-->
+					<input type="submit" value="Salvar" class="btn btn-large btn-success" name="save"/>
+					<a href="/marca_delete/{{marca.id}}/" onclick="show__(this.href, 550, 750); return false;" class="btn btn-large btn-primary">Excluir</a>
+					<a href="/marcas/" onclick="close__('N');" class="btn btn-large">Cancelar</a>								
+				</div>
+				
+			</form>
+		</div> <!-- .span8 -->
+			
+	</div>

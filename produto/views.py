@@ -123,9 +123,9 @@ def produto_form(request, pk):
 #		delected = 'S'
 #	return render_to_response('produto_foto_delete.html', {'foto': foto, 'produto': produto, 'delected': delected}, context_instance=RequestContext(request))
 	
-#def marcas(request):
-#	marcas = Marca.objects.all()
-#	return render_to_response('marcas.html', {'marcas': marcas})	
+def marcas(request):
+	marcas = Marca.objects.all()
+	return render_to_response('_base.html', {'marcas': marcas, 'template': 'marcas.html'})	
 	
 	
 #def marca_new(request):
@@ -150,14 +150,47 @@ def produto_form(request, pk):
 #		form = MarcaForm(instance=m)
 #	return render_to_response('marca_edit.html', {'form': form}, context_instance=RequestContext(request))	
 	
+def marca_form(request, pk):
+	m = Marca()		
+	form = MarcaForm()	
+	if pk != '0':
+		m = Marca.objects.get(pk=pk)
+		form = MarcaForm(instance=m)
+	if request.method == 'POST':
+		if pk != '0':
+			form = MarcaForm(request.POST, request.FILES, instance=m)
+		else:
+			form = MarcaForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return redirect('marcas')
+	return render_to_response('_base.html', {'form': form, 'marca': m, 'template': 'marca_form.html' }, context_instance=RequestContext(request))
+		
 	
-#def marca_delete(request, pk):
-#	m = Marca.objects.get(pk=pk)
-#	delected = 'N'
-#	if request.method == 'POST':
-#		m.delete()
-#		delected = 'S'
-#	return render_to_response('marca_delete.html', {'marca': m, 'delected': delected}, context_instance=RequestContext(request))
+def marca_form_simple(request, pk):
+	m = Marca()	
+	form = MarcaForm()
+	execute_transation = 'N'
+	if pk != '0':
+		m = Marca.objects.get(pk=pk)
+		form = MarcaForm(instance=p)
+	if request.method == 'POST':
+		if pk != '0':
+			form = MarcaForm(request.POST, request.FILES, instance=m)
+		else:
+			form = MarcaForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			execute_transation = 'S'
+	return render_to_response('_base_simple.html', {'form': form, 'marca': m, 'execute_transation': execute_transation, 'template': 'marca_form.html' }, context_instance=RequestContext(request))
+		
+def marca_delete(request, pk):
+	m = Marca.objects.get(pk=pk)
+	execute_transation = 'N'
+	if request.method == 'POST':
+		m.delete()
+		execute_transation = 'S'
+	return render_to_response('_base_simple.html', {'marca': m, 'execute_transation': execute_transation, 'template': 'marca_delete.html'}, context_instance=RequestContext(request))
 	
 #def fornecedores(request):
 #	fornecedores = Fornecedor.objects.all()

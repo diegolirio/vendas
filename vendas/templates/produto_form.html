@@ -77,8 +77,8 @@
 						{{ form.marca.label }}
 					</label>
 					<div class="controls">
-						{{ form.marca }} <a href="#" onclick="alert('add marca');"><i class="icon-plus"></i></a>
-						{% if form.marca.errors %}
+						{{ form.marca }} <a href="/marca_form_simple/0/" onclick="show__(this.href, 550, 750); return false;"><i class="icon-plus"></i></a>
+						{% if form.marca.errors %} 
 							{% for error in form.marca.errors %}
 								<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>
 							{% endfor %}
@@ -93,7 +93,7 @@
 
 				<div class="form-actions">
 					<!--<button type="submit" class="btn btn-large btn-primary">Save Billing Address</button>-->
-					<input type="submit" value="Salvar alteração" class="btn btn-large btn-success" name="save"/>
+					<input type="submit" value="Salvar" class="btn btn-large btn-success" name="save"/>
 					<a href="/produtos/" class="btn btn-large">Cancelar</a>								
 				</div>
 				

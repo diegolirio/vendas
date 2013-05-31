@@ -35,10 +35,12 @@ urlpatterns = patterns('',
 	#url(r'^cliente_delete/(?P<pk>\d+)/$', 'cliente.views.cliente_delete'),
 	
 	# ------- Marcas ------
-	#url(r'^marcas/$', 'produto.views.marcas'),
+	url(r'^marcas/$', 'produto.views.marcas', name='marcas'),
 	#url(r'^marca_new/$', 'produto.views.marca_new'),
 	#url(r'^marca_edit/(?P<pk>\d+)/$', 'produto.views.marca_edit'),
-	#url(r'^marca_delete/(?P<pk>\d+)/$', 'produto.views.marca_delete'),
+	url(r'^marca_delete/(?P<pk>\d+)/$', 'produto.views.marca_delete'),
+	url(r'^marca_form/(?P<pk>\d+)/$', 'produto.views.marca_form'),
+	url(r'^marca_form_simple/(?P<pk>\d+)/$', 'produto.views.marca_form_simple'),
     
     # ------- Produtos ------
     url(r'^produtos/$', 'produto.views.produtos', name='produtos'),

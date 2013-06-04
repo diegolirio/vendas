@@ -19,11 +19,13 @@
 
 	<div class="row well">
 		<div class="span7">
+			
 			<form action="" method="POST" enctype="multipart/form-data" class="form-horizontal"> {% csrf_token %}
+				<!--
 				<div class="control-group">
 					<label class="control-label">{{ form.codigo.label }}</label>										
 					<div class="controls">
-						<!--<input name="{{form.codigo.name}}" type="text" value="{{ produto.codigo }}">-->
+						<!--<input name="{{form.codigo.name}}" type="text" value="{{ produto.codigo }}">--
 						{{ form.codigo }}
 						{% if form.codigo.errors %}
 							{% for error in form.codigo.errors %}
@@ -36,7 +38,7 @@
 				<div class="control-group">
 					<label class="control-label">{{ form.nome.label }}</label>
 					<div class="controls">
-						<!--<input name="{{form.nome.name}}" type="text" value="{{ produto.nome }}">-->
+						<!--<input name="{{form.nome.name}}" type="text" value="{{ produto.nome }}">--
 						{{ form.nome }}
 						{% if form.nome.errors %}
 							{% for error in form.nome.errors %}
@@ -49,7 +51,7 @@
 				<div class="control-group">
 					<label class="control-label">{{ form.valor.label }}</label>										
 					<div class="controls">
-						<!--<input name="{{form.valor.name}}" type="text" value="{{ produto.valor }}">-->
+						<!--<input name="{{form.valor.name}}" type="text" value="{{ produto.valor }}">--
 						{{ form.valor }}
 						{% if form.valor.errors %}
 							{% for error in form.valor.errors %}
@@ -62,7 +64,7 @@
 				<div class="control-group">
 					<label class="control-label">{{ form.data_compra.label }}</label>										
 					<div class="controls">
-						<!--<input name="{{form.data_compra.name}}" type="text" value="{{ produto.data_compra }}">-->
+						<!--<input name="{{form.data_compra.name}}" type="text" value="{{ produto.data_compra }}">--
 						{{ form.data_compra }}
 						{% if form.data_compra.errors %}
 							{% for error in form.data_compra.errors %}
@@ -87,15 +89,19 @@
 						<select name="country" id="country">
 							<option value=""></option>	
 						</select>
-						-->
+						--
 					</div>
 				</div>
 
 				<div class="form-actions">
-					<!--<button type="submit" class="btn btn-large btn-primary">Save Billing Address</button>-->
+					<!--<button type="submit" class="btn btn-large btn-primary">Save Billing Address</button>--
 					<input type="submit" value="Salvar" class="btn btn-large btn-success" name="save"/>
 					<a href="/produtos/" class="btn btn-large">Cancelar</a>								
 				</div>
+				-->
+				
+				{% include '_form.html' %}
+				
 				
 			</form>
 		</div> <!-- .span8 -->

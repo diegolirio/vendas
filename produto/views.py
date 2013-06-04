@@ -61,7 +61,14 @@ def produto_form(request, pk):
 		if form.is_valid():
 			form.save()
 			return redirect('produtos')
-	return render_to_response('_base.html', {'form': form, 'produto': p, 'foto_main': foto_main, 'template': 'produto_form.html' }, context_instance=RequestContext(request))
+	return render_to_response('_base.html', 
+	                          {  'form': form, 
+	                             'produto': p, 
+	                             'foto_main': foto_main, 
+	                             'template': 'produto_form.html',
+	                             'titulo_form': 'Cadastro de Veiculo',
+	                             'button_cancel': '/produtos/'
+	                           }, context_instance=RequestContext(request))
 		
 #def produto_delete(request, pk):
 #	p = Produto.objects.get(pk=pk)

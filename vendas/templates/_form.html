@@ -1,0 +1,22 @@
+	<div id="legend">
+	   <legend><h3>{{ titulo_form }}</h3></legend>
+	</div>						
+	{% for field in form %}
+		<div class="control-group">
+			<label class="control-label">{{ field.label }}</label>										
+			<div class="controls">
+				<!--<input name="{{form.codigo.name}}" type="text" value="{{ produto.codigo }}">-->
+				{{ field }} <!--<a href="#" onclick="alert('add ');"><i class="icon-plus"></i></a> {{ field.field.widget }}-->
+				{% if field.errors %}
+					{% for error in field.errors %}
+						<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>
+					{% endfor %}
+				{% endif %} 									
+			</div>	
+		</div>
+	{% endfor %}
+
+	<div class="form-actions">
+		<input type="submit" value="Salvar" class="btn btn-large btn-success" name="save"/>
+		<a href="{{button_cancel}}" class="btn btn-large">Cancelar</a>								
+	</div>

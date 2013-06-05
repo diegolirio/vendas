@@ -7,6 +7,13 @@
 			<div class="controls">
 				<!--<input name="{{form.codigo.name}}" type="text" value="{{ produto.codigo }}">-->
 				{{ field }} <!--<a href="#" onclick="alert('add ');"><i class="icon-plus"></i></a> {{ field.field.widget }}-->
+				
+				{% if field.field.widget|klass == 'TextInput' %}
+					Diego
+				{% else %}
+					Lirio
+				{% endif %}
+				
 				{% if field.errors %}
 					{% for error in field.errors %}
 						<span class="help-inline"><span class="text-error">{{ error|escape }}</span></span>

@@ -7,13 +7,15 @@ def cut(value, arg):
     """Removes all values of arg from the given string"""
     return value.replace(arg, '')
     
-@register.filter
-def classes(field):
-    """
-    Returns CSS classes of a field
-    """
-    return field.field.widget.attrs.get('class', None)    
+def hello(text):
+    """Removes all values of arg from the given string"""
+    return "Hello, " + text
     
-@register.filter('klass')
-def klass(ob):
-    return "Diego"   
+#@register.filter
+#def classes(field):
+#    """    Returns CSS classes of a field    """
+#    return field.field.widget.attrs.get('class', None)    
+    
+#@register.filter('klass')
+#def klass(ob):
+#    return "Diego"   
